@@ -9,6 +9,8 @@ namespace GTAVLife.View
 {
     public class DebugVehicleSubview : SimpleSingletonBase<DebugVehicleSubview>, IView
     {
+        public event ControllerHandler OnSetController;
+        public event ProcessHandler OnProcess;
         private NativeMenu menu;
         private DebugController controller;
         private Dictionary<string, string> items = new Dictionary<string, string>

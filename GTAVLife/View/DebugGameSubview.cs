@@ -8,6 +8,8 @@ namespace GTAVLife.View
 {
     public class DebugGameSubview : SimpleSingletonBase<DebugGameSubview>, IView
     {
+        public event ControllerHandler OnSetController;
+        public event ProcessHandler OnProcess;
         private DebugController controller;
         private Dictionary<string, string> items = new Dictionary<string, string>
         {

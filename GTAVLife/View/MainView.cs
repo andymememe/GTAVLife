@@ -8,6 +8,8 @@ namespace GTAVLife.View
 {
     public class MainView : SimpleSingletonBase<MainView>, IView
     {
+        public event ControllerHandler OnSetController;
+        public event ProcessHandler OnProcess;
         private NativeMenu menu;
         private List<NativeMenu> submenus;
         private MainController controller;
@@ -64,22 +66,24 @@ namespace GTAVLife.View
             }
         }
 
-        private void setupUI()
-        {
-            this.menu = new NativeMenu("Life", "Living in LS");
-
-            this.menu.Add(new NativeItem("Title", "Description", ">>>"));
-            this.menu.Add(new NativeItem("1", "111", ">>>"));
-            this.menu.Add(new NativeItem("2", "222", ">>>"));
-            this.menu.Add(new NativeItem("3", "333", ">>>"));
-            this.submenus = new List<NativeMenu>();
-
-            this.menu.ItemActivated += OnItemActivated;
-        }
-
         private MainView()
         {
-            setupUI();
+            IView[] views = {
+                MainLifeSubview.Instance
+            };
+
+            this.menu = new NativeMenu("Living in LS", "Main");
+            this.menu.TitleFont = Font.HouseScript;
+
+            this.submenus = new List<NativeMenu>();
+
+            foreach (IView view in views)
+            {
+                this.menu.AddSubMenu(view.Menu);
+                this.submenus.Add(view.Menu);
+                this.OnSetController += view.SetController;
+                this.OnProcess += view.Process;
+            }
         }
     }
 }

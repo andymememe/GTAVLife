@@ -9,6 +9,8 @@ namespace GTAVLife.View
 
     public interface IView
     {
+        event ControllerHandler OnSetController;
+        event ProcessHandler OnProcess;
         NativeMenu Menu { get; }
         List<NativeMenu> Submenus { get; }
         void SetController(IController controller);

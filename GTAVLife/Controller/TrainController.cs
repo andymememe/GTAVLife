@@ -18,7 +18,10 @@ namespace GTAVLife.Controller
             }
         }
 
-        public void Hide() { }
+        public void Hide()
+        {
+
+        }
 
         public void Process()
         {

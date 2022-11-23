@@ -45,7 +45,8 @@ public class GTAVLifeScript : Script
         if (isFreeAndPlayable())
         {
             Gate.ControlGate();
-            RestrictedZone.DisableRestrictedZone();
+            ScriptTerminator.DisableRestrictedZone();
+            ScriptTerminator.DisableVendingMachine();
             RelationshipHelper.MakeFriendly(RelationshipGroupHash.ARMY);
             RelationshipHelper.MakeFriendly(RelationshipGroupHash.COP);
             RelationshipHelper.MakeFriendly(RelationshipGroupHash.MEDIC);

@@ -17,6 +17,7 @@ namespace GTAVLife.View
             {"X", "X"},
             {"Y", "Y"},
             {"Z", "Z"},
+            {"Name", "Name"},
             {"Health", "Health"},
             {"MaxHealth", "Max Health"},
             {"Armor", "Armor"},

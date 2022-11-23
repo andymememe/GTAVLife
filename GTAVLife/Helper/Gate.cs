@@ -9,20 +9,21 @@ namespace GTAVLife.Helper
         private const int BARRIER02 = 1230099731;
         private const float OPEN = 1f;
         private const float CLOSE = -0.1f;
-        private const float OPEN_THRESHOLD = 6f;
-        private const float CLOSE_THRESHOLD = 15f;
+        private const float OPEN_THRESHOLD = 5000f;
+        private const float CLOSE_THRESHOLD = 12000f;
+        private const float NEARBY_RADIUS = 24000f;
         private static Model[] barrierIDs = { BARRIER01, BARRIER02 };
 
         public static void ControlGate()
         {
-            Prop[] barrierGates = World.GetNearbyProps(Game.Player.Character.Position, 30f, barrierIDs);
+            Prop[] barrierGates = World.GetNearbyProps(Game.Player.Character.Position, Distance.ToGameWorldDistance(NEARBY_RADIUS), barrierIDs);
             foreach (var gate in barrierGates)
             {
                 if (Game.Player.Character.IsInVehicle())
                 {
                     float gateDist = World.GetDistance(Game.Player.Character.RightPosition, gate.RightPosition);
 
-                    if (gateDist <= OPEN_THRESHOLD)
+                    if (gateDist <= Distance.ToGameWorldDistance(OPEN_THRESHOLD))
                     {
                         if (gate.Model.GetHashCode() == BARRIER01)
                         {
@@ -41,7 +42,7 @@ namespace GTAVLife.Helper
                             );
                         }
                     }
-                    else if (gateDist > CLOSE_THRESHOLD)
+                    else if (gateDist > Distance.ToGameWorldDistance(CLOSE_THRESHOLD))
                     {
                         if (gate.Model.GetHashCode() == BARRIER01)
                         {

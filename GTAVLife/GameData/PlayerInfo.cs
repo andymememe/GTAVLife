@@ -135,9 +135,15 @@ namespace GTAVLife.GameData
             if (Player.IsAiming)
             {
                 RaycastResult result = World.GetCrosshairCoordinates(IntersectFlags.Objects);
-                if (result.HitEntity != null)
+                if (result.HitEntity != null && result.HitEntity.Exists())
                 {
-                    Screen.ShowSubtitle(result.HitEntity.Model.GetHashCode().ToString(), 5000);
+                    string msg = String.Format(
+                        "{0} ({1})",
+                        result.HitEntity.Model.GetHashCode(),
+                        result.HitEntity.Health
+                    );
+
+                    Screen.ShowSubtitle(msg, 5000);
                     World.DrawLightWithRange(result.HitEntity.Position, Color.LimeGreen, 6f, 1f);
                 }
             }

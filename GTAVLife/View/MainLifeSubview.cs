@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using GTA.UI;
 using GTAVLife.GameData;
 using GTAVLife.Controller;
 using GTAVLife.Helper;
@@ -8,7 +9,13 @@ namespace GTAVLife.View
 {
     public class MainLifeSubview : SimpleSingletonBase<MainLifeSubview>, IView
     {
-        public NativeMenu Menu => throw new System.NotImplementedException();
+        public NativeMenu Menu
+        {
+            get
+            {
+                return menu;
+            }
+        }
 
         public List<NativeMenu> Submenus => throw new System.NotImplementedException();
 
@@ -21,10 +28,10 @@ namespace GTAVLife.View
             {"TrainTicket", "Train Ticket"},
             {"TAPCard", "TAP Card"},
         };
-        
+
         public void Hide()
         {
-            Menu.Visible = false;
+            this.menu.Visible = false;
         }
 
         public void Process()
@@ -40,38 +47,37 @@ namespace GTAVLife.View
                     menu.Items[i].AltTitle = result.ToString();
                 }
             }
+            OnProcess?.Invoke();
         }
 
         public void SetController(IController controller)
         {
-            this.controller = (MainController) controller;
+            this.controller = (MainController)controller;
+            OnSetController?.Invoke(controller);
         }
 
         public void Show()
         {
-            Menu.Visible = true;
+            this.menu.Visible = true;
         }
 
         private string getResult(string tag)
         {
-            if (PlayerInfo.Vehicle != null)
+            switch (tag)
             {
-                switch (tag)
-                {
-                    case "TrainTicket":
-                        return Life.Instance.HasTrainTicket.ToString();
-                    case "TAPCard":
-                        return Life.Instance.HasTAPCard.ToString();
-                    default:
-                        return "";
-                }
+                case "TrainTicket":
+                    return Life.Instance.HasTrainTicket.ToString();
+                case "TAPCard":
+                    return Life.Instance.HasTAPCard.ToString();
+                default:
+                    return "";
             }
-            return "";
         }
 
         private void setupUI()
         {
             this.menu = new NativeMenu("Living in LS", "Life");
+            this.menu.TitleFont = Font.HouseScript;
             foreach (KeyValuePair<string, string> item in items)
             {
                 NativeItem nativeItem = new NativeItem(item.Value);

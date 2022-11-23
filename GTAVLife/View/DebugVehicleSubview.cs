@@ -56,11 +56,13 @@ namespace GTAVLife.View
                     menu.Items[i].AltTitle = result.ToString();
                 }
             }
+            OnProcess?.Invoke();
         }
 
         public void SetController(IController controller)
         {
             this.controller = (DebugController)controller;
+            OnSetController?.Invoke(controller);
         }
 
         public void Show()
@@ -105,7 +107,7 @@ namespace GTAVLife.View
 
         private void setupUI()
         {
-            this.menu = new NativeMenu("Vehicle", "Show Current Vehicle Data");
+            this.menu = new NativeMenu("Debug", "Current Vehicle Stats");
             foreach (KeyValuePair<string, string> item in items)
             {
                 NativeItem nativeItem = new NativeItem(item.Value);

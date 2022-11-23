@@ -35,6 +35,7 @@ namespace GTAVLife.View
         public void SetController(IController controller)
         {
             this.controller = (MainController)controller;
+            OnSetController?.Invoke(controller);
         }
 
         public void Show()
@@ -49,7 +50,7 @@ namespace GTAVLife.View
 
         public void Process()
         {
-
+            OnProcess?.Invoke();
         }
 
         public void OnItemActivated(object sender, ItemActivatedArgs e)
@@ -73,12 +74,13 @@ namespace GTAVLife.View
             };
 
             this.menu = new NativeMenu("Living in LS", "Main");
-            this.menu.TitleFont = Font.HouseScript;
+            this.menu.TitleFont = Font.ChaletComprimeCologne;
 
             this.submenus = new List<NativeMenu>();
 
             foreach (IView view in views)
             {
+                view.Menu.TitleFont = Font.ChaletComprimeCologne;
                 this.menu.AddSubMenu(view.Menu);
                 this.submenus.Add(view.Menu);
                 this.OnSetController += view.SetController;

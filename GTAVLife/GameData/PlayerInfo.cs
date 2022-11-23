@@ -27,7 +27,11 @@ namespace GTAVLife.GameData
         {
             get
             {
-                return Enum.GetName(typeof(PedHash), Character.GetHashCode());
+                string name = Enum.GetName(typeof(PedHash), (uint)Character.Model.Hash);
+                if (name == null) {
+                    return "";
+                }
+                return name;
             }
         }
 
@@ -79,6 +83,22 @@ namespace GTAVLife.GameData
                     }
                 }
                 return closestPed;
+            }
+        }
+
+        public static string NearestPedName
+        {
+            get
+            {
+                Ped closestPed = NearestPed;
+                if (closestPed != null) {
+                    string name = Enum.GetName(typeof(PedHash), (uint)closestPed.Model.Hash);
+                    if (name == null) {
+                        return "";
+                    }
+                    return name;
+                }
+                return "";
             }
         }
 

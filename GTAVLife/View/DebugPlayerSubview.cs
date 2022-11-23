@@ -26,6 +26,7 @@ namespace GTAVLife.View
             {"Wanted", "Wanted"},
             {"Zone", "Zone"},
             {"LocalizedZone", "Zone"},
+            {"NearestPedName", "N. Ped"},
             {"NearestPedRelationshipGroup", "N. Ped R.G."},
             {"NearestPedRelationship", "N. Ped R."},
             {"IsNearestPedHuman", "N. Ped Human"},
@@ -110,6 +111,8 @@ namespace GTAVLife.View
                     return PlayerInfo.Zone;
                 case "LocalizedZone":
                     return PlayerInfo.LocalizedZone;
+                case "NearestPedName":
+                    return PlayerInfo.NearestPedName;
                 case "NearestPedRelationshipGroup":
                     if (PlayerInfo.NearestPed == null)
                     {

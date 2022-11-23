@@ -14,7 +14,9 @@ namespace GTAVLife.View
         private Dictionary<string, string> items = new Dictionary<string, string>
         {
             {"Name", "Name"},
+            {"NameLocalized", "Name"},
             {"Class", "Class"},
+            {"ClassLocalized", "Class"},
             {"Health", "Health"},
             {"MaxHealth", "Max Health"},
             {"EngineHealth", "Engine Health"},
@@ -78,8 +80,12 @@ namespace GTAVLife.View
                 switch (tag)
                 {
                     case "Name":
+                        return PlayerInfo.Vehicle.DisplayName;
+                    case "NameLocalized":
                         return PlayerInfo.Vehicle.LocalizedName;
                     case "Class":
+                        return PlayerInfo.Vehicle.ClassDisplayName;
+                    case "ClassLocalized":
                         return PlayerInfo.Vehicle.ClassLocalizedName;
                     case "Health":
                         return PlayerInfo.Vehicle.Health.ToString();

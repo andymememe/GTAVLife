@@ -24,10 +24,12 @@ namespace GTAVLife.View
             {"Money", "Money"},
             {"Wanted", "Wanted"},
             {"Zone", "Zone"},
-            {"NearestPedRelationshipGroup", "Nearest Ped Relationship Group"},
-            {"NearestPedRelationship", "Nearest Ped Relationship"},
-            {"IsNearestPedHuman", "Nearest Ped Human"},
-            {"NearestVehicle", "Nearest Vehicle"},
+            {"LocalizedZone", "Zone"},
+            {"NearestPedRelationshipGroup", "N. Ped R.G."},
+            {"NearestPedRelationship", "N. Ped R."},
+            {"IsNearestPedHuman", "N. Ped Human"},
+            {"NearestVehicle", "N. Vehicle"},
+            {"NearestVehicleLocalized", "N. Vehicle"},
             {"IsPlayerControlable", "Controlable"},
             {"IsPlayerInVehicle", "In Vehicle"},
         };
@@ -89,6 +91,8 @@ namespace GTAVLife.View
                     return PlayerInfo.Position.Y.ToString();
                 case "Z":
                     return PlayerInfo.Position.Z.ToString();
+                case "Name":
+                    return PlayerInfo.Name;
                 case "Health":
                     return PlayerInfo.Character.Health.ToString();
                 case "MaxHealth":
@@ -102,7 +106,9 @@ namespace GTAVLife.View
                 case "Wanted":
                     return PlayerInfo.Player.WantedLevel.ToString();
                 case "Zone":
-                    return PlayerInfo.Zone.ToString();
+                    return PlayerInfo.Zone;
+                case "LocalizedZone":
+                    return PlayerInfo.LocalizedZone;
                 case "NearestPedRelationshipGroup":
                     if (PlayerInfo.NearestPed == null)
                     {
@@ -119,6 +125,12 @@ namespace GTAVLife.View
                     }
                     return PlayerInfo.NearestPed.GetRelationshipWithPed(PlayerInfo.Character).ToString();
                 case "NearestVehicle":
+                    if (PlayerInfo.NearestVehicle == null)
+                    {
+                        return "";
+                    }
+                    return PlayerInfo.NearestVehicle.DisplayName;
+                case "NearestVehicleLocalized":
                     if (PlayerInfo.NearestVehicle == null)
                     {
                         return "";

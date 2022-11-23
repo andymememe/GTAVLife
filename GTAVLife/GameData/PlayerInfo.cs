@@ -1,3 +1,4 @@
+using System;
 using GTA;
 using GTA.Math;
 using System.Drawing;
@@ -22,6 +23,14 @@ namespace GTAVLife.GameData
             }
         }
 
+        public static string Name
+        {
+            get
+            {
+                return Enum.GetName(typeof(PedHash), Character.GetHashCode());
+            }
+        }
+
         public static Vector3 Position
         {
             get
@@ -35,6 +44,22 @@ namespace GTAVLife.GameData
             get
             {
                 return Character.CurrentVehicle;
+            }
+        }
+
+        public static string Zone
+        {
+            get
+            {
+                return World.GetZoneDisplayName(Character.Position);
+            }
+        }
+
+        public static string LocalizedZone
+        {
+            get
+            {
+                return World.GetZoneLocalizedName(Character.Position);
             }
         }
 
@@ -62,14 +87,6 @@ namespace GTAVLife.GameData
             get
             {
                 return World.GetClosestVehicle(Character.Position, 3f);
-            }
-        }
-
-        public static string Zone
-        {
-            get
-            {
-                return World.GetZoneLocalizedName(Character.Position);
             }
         }
 

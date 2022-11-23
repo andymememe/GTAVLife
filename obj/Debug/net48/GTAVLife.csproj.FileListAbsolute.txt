@@ -1,0 +1,12 @@
+G:\CSharp\GTAVLife\obj\Debug\net48\GTAVLife.csproj.AssemblyReference.cache
+G:\CSharp\GTAVLife\obj\Debug\net48\GTAVLife.GeneratedMSBuildEditorConfig.editorconfig
+G:\CSharp\GTAVLife\obj\Debug\net48\GTAVLife.AssemblyInfoInputs.cache
+G:\CSharp\GTAVLife\obj\Debug\net48\GTAVLife.AssemblyInfo.cs
+G:\CSharp\GTAVLife\obj\Debug\net48\GTAVLife.csproj.CoreCompileInputs.cache
+G:\CSharp\GTAVLife\bin\Debug\net48\GTAVLife.dll
+G:\CSharp\GTAVLife\bin\Debug\net48\GTAVLife.pdb
+G:\CSharp\GTAVLife\bin\Debug\net48\LemonUI.SHVDN3.dll
+G:\CSharp\GTAVLife\bin\Debug\net48\ScriptHookVDotNet3.dll
+G:\CSharp\GTAVLife\obj\Debug\net48\GTAVLife.csproj.CopyComplete
+G:\CSharp\GTAVLife\obj\Debug\net48\GTAVLife.dll
+G:\CSharp\GTAVLife\obj\Debug\net48\GTAVLife.pdb

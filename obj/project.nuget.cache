@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "Rlv/e6hdof5eoGLF6sAz0xrORxniQKU0jJWwxQRtCmpKi0OdecI/zI7oacBUjc7SkAlUBr3TQPhJeH0bHqLRXw==",
+  "success": true,
+  "projectFilePath": "G:\\CSharp\\GTAVLife\\GTAVLife.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\chena\\.nuget\\packages\\lemonui.shvdn3\\1.9.1\\lemonui.shvdn3.1.9.1.nupkg.sha512",
+    "C:\\Users\\chena\\.nuget\\packages\\scripthookvdotnet3\\3.5.1\\scripthookvdotnet3.3.5.1.nupkg.sha512"
+  ],
+  "logs": []
+}

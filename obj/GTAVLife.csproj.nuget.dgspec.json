@@ -1,0 +1,55 @@
+{
+  "format": 1,
+  "restore": {
+    "G:\\CSharp\\GTAVLife\\GTAVLife.csproj": {}
+  },
+  "projects": {
+    "G:\\CSharp\\GTAVLife\\GTAVLife.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "G:\\CSharp\\GTAVLife\\GTAVLife.csproj",
+        "projectName": "GTAVLife",
+        "projectPath": "G:\\CSharp\\GTAVLife\\GTAVLife.csproj",
+        "packagesPath": "C:\\Users\\chena\\.nuget\\packages\\",
+        "outputPath": "G:\\CSharp\\GTAVLife\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\chena\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net48"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net48": {
+            "targetAlias": "net48",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net48": {
+          "targetAlias": "net48",
+          "dependencies": {
+            "LemonUI.SHVDN3": {
+              "target": "Package",
+              "version": "[1.9.1, )"
+            },
+            "ScriptHookVDotNet3": {
+              "target": "Package",
+              "version": "[3.5.1, )"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

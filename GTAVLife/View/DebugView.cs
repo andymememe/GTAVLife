@@ -1,28 +1,19 @@
 using System.Collections.Generic;
+using GTAVLife.Helper;
 using GTAVLife.Controller;
 using LemonUI.Menus;
 
 namespace GTAVLife.View
 {
-    public class DebugView : IView
+    public class DebugView : SimpleSingletonBase<DebugView>, IView
     {
         public event ControllerHandler OnSetController;
         public event ProcessHandler OnProcess;
-        private static DebugView instance = null;
         private DebugController controller;
 
         // UI Related
         private NativeMenu menu;
         private List<NativeMenu> submenus;
-
-
-        public static DebugView Instance
-        {
-            get
-            {
-                return instance ?? new DebugView();
-            }
-        }
 
         public NativeMenu Menu
         {
@@ -85,14 +76,12 @@ namespace GTAVLife.View
             this.OnSetController += DebugGameSubview.Instance.SetController;
             this.OnSetController += DebugPlayerSubview.Instance.SetController;
             this.OnSetController += DebugVehicleSubview.Instance.SetController;
-            
-            this.OnProcess +=  DebugGameSubview.Instance.Process;
-            this.OnProcess +=  DebugPlayerSubview.Instance.Process;
-            this.OnProcess +=  DebugVehicleSubview.Instance.Process;
-            
-            setupUI();
 
-            instance = this;
+            this.OnProcess += DebugGameSubview.Instance.Process;
+            this.OnProcess += DebugPlayerSubview.Instance.Process;
+            this.OnProcess += DebugVehicleSubview.Instance.Process;
+
+            setupUI();
         }
     }
 }

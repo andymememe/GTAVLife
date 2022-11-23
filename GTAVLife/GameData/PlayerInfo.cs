@@ -1,6 +1,7 @@
 using System;
 using GTA;
 using GTA.Math;
+using GTA.UI;
 using System.Drawing;
 
 namespace GTAVLife.GameData
@@ -28,7 +29,8 @@ namespace GTAVLife.GameData
             get
             {
                 string name = Enum.GetName(typeof(PedHash), (uint)Character.Model.Hash);
-                if (name == null) {
+                if (name == null)
+                {
                     return "";
                 }
                 return name;
@@ -91,9 +93,11 @@ namespace GTAVLife.GameData
             get
             {
                 Ped closestPed = NearestPed;
-                if (closestPed != null) {
+                if (closestPed != null)
+                {
                     string name = Enum.GetName(typeof(PedHash), (uint)closestPed.Model.Hash);
-                    if (name == null) {
+                    if (name == null)
+                    {
                         return "";
                     }
                     return name;
@@ -123,6 +127,19 @@ namespace GTAVLife.GameData
             if (NearestVehicle != null)
             {
                 World.DrawLightWithRange(NearestVehicle.Position, Color.Red, 6f, 1f);
+            }
+        }
+
+        public static void DrawMarkerOnAimingTarget()
+        {
+            if (Player.IsAiming)
+            {
+                RaycastResult result = World.GetCrosshairCoordinates(IntersectFlags.Objects);
+                if (result.HitEntity != null)
+                {
+                    Screen.ShowSubtitle(result.HitEntity.Model.GetHashCode().ToString(), 5000);
+                    World.DrawLightWithRange(result.HitEntity.Position, Color.LimeGreen, 6f, 1f);
+                }
             }
         }
     }

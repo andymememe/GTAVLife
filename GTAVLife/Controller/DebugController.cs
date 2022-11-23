@@ -1,20 +1,12 @@
 using GTAVLife.GameData;
+using GTAVLife.Helper;
 using GTAVLife.View;
 
 namespace GTAVLife.Controller
 {
-    public class DebugController : IController
+    public class DebugController : SimpleSingletonBase<DebugController>, IController
     {
-        private static DebugController instance = null;
         private DebugView debugView;
-
-        public static DebugController Instance
-        {
-            get
-            {
-                return instance ?? new DebugController();
-            }
-        }
 
         public IView View
         {
@@ -29,7 +21,7 @@ namespace GTAVLife.Controller
             debugView.Show();
         }
 
-        public void OnHide()
+        public void Hide()
         {
             debugView.Hide();
         }
@@ -38,6 +30,7 @@ namespace GTAVLife.Controller
         {
             PlayerInfo.DrawMarkerOnNearestPed();
             PlayerInfo.DrawMarkerOnNearestVehicle();
+            PlayerInfo.DrawMarkerOnAimingTarget();
             debugView.Process();
         }
 
@@ -45,7 +38,6 @@ namespace GTAVLife.Controller
         {
             debugView = DebugView.Instance;
             debugView.SetController(this);
-            instance = this;
         }
     }
 }

@@ -1,14 +1,14 @@
 using System.Collections.Generic;
 using System;
 using LemonUI.Menus;
+using GTAVLife.Helper;
 using GTAVLife.Controller;
 using GTAVLife.GameData;
 
 namespace GTAVLife.View
 {
-    public class DebugVehicleSubview : IView
+    public class DebugVehicleSubview : SimpleSingletonBase<DebugVehicleSubview>, IView
     {
-        private static DebugVehicleSubview instance = null;
         private NativeMenu menu;
         private DebugController controller;
         private Dictionary<string, string> items = new Dictionary<string, string>
@@ -25,14 +25,6 @@ namespace GTAVLife.View
             {"PassengerCapacity", "Passenger Capacity"},
             {"PassengerCount", "Passenger Count"},
         };
-
-        public static DebugVehicleSubview Instance
-        {
-            get
-            {
-                return instance ?? new DebugVehicleSubview();
-            }
-        }
 
         public NativeMenu Menu
         {
@@ -55,7 +47,8 @@ namespace GTAVLife.View
             {
                 object rawTag = menu.Items[i].Tag;
 
-                if (rawTag != null) {
+                if (rawTag != null)
+                {
                     string tag = (string)rawTag;
                     string result = getResult(tag);
                     menu.Items[i].AltTitle = result.ToString();
@@ -122,7 +115,6 @@ namespace GTAVLife.View
         private DebugVehicleSubview()
         {
             setupUI();
-            instance = this;
         }
     }
 }

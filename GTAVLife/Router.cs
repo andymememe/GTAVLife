@@ -1,3 +1,4 @@
+using GTAVLife.Helper;
 using GTAVLife.Controller;
 
 namespace GTAVLife
@@ -5,19 +6,11 @@ namespace GTAVLife
     public delegate void HideHandler();
     public delegate void ProcessHandler();
 
-    public class Router
+    public class Router : SimpleSingletonBase<Router>
     {
         public event HideHandler OnHide;
         public event ProcessHandler OnProcess;
-        private static Router instance = null;
         private IController[] controllers;
-
-        public static Router Instance
-        {
-            get {
-                return instance ?? new Router();
-            }
-        }
 
         public IController[] Controllers
         {
@@ -53,18 +46,17 @@ namespace GTAVLife
 
         private Router()
         {
-            this.OnHide += MainController.Instance.OnHide;
-            this.OnHide += DebugController.Instance.OnHide;
-
-            this.OnProcess += MainController.Instance.Process;
-            this.OnProcess += DebugController.Instance.Process;
-
             this.controllers = new IController[] {
                 MainController.Instance,
                 DebugController.Instance,
+                TrainController.Instance,
             };
 
-            instance = this;
+            foreach (IController controller in controllers)
+            {
+                this.OnHide += controller.Hide;
+                this.OnProcess += controller.Process;
+            }
         }
     }
 }

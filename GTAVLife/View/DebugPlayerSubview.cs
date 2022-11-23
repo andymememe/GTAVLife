@@ -7,9 +7,8 @@ using GTAVLife.GameData;
 
 namespace GTAVLife.View
 {
-    public class DebugPlayerSubview : IView
+    public class DebugPlayerSubview : SimpleSingletonBase<DebugPlayerSubview>, IView
     {
-        private static DebugPlayerSubview instance = null;
         private NativeMenu menu;
         private DebugController controller;
         private Dictionary<string, string> items = new Dictionary<string, string>
@@ -36,14 +35,6 @@ namespace GTAVLife.View
             {"IsPlayerInVehicle", "In Vehicle"},
         };
 
-        public static DebugPlayerSubview Instance
-        {
-            get
-            {
-                return instance ?? new DebugPlayerSubview();
-            }
-        }
-
         public NativeMenu Menu
         {
             get
@@ -65,7 +56,8 @@ namespace GTAVLife.View
             {
                 object rawTag = menu.Items[i].Tag;
 
-                if (rawTag != null) {
+                if (rawTag != null)
+                {
                     string tag = (string)rawTag;
                     string result = getResult(tag);
                     menu.Items[i].AltTitle = result.ToString();
@@ -169,7 +161,6 @@ namespace GTAVLife.View
         private DebugPlayerSubview()
         {
             setupUI();
-            instance = this;
         }
     }
 }

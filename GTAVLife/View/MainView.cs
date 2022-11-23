@@ -1,24 +1,16 @@
 using System.Collections.Generic;
 using GTA.UI;
 using LemonUI.Menus;
+using GTAVLife.Helper;
 using GTAVLife.Controller;
 
 namespace GTAVLife.View
 {
-    public class MainView : IView
+    public class MainView : SimpleSingletonBase<MainView>, IView
     {
-        private static MainView instance = null;
         private NativeMenu menu;
         private List<NativeMenu> submenus;
         private MainController controller;
-
-        public static MainView Instance
-        {
-            get
-            {
-                return instance ?? new MainView();
-            }
-        }
 
         public NativeMenu Menu
         {
@@ -88,8 +80,6 @@ namespace GTAVLife.View
         private MainView()
         {
             setupUI();
-
-            instance = this;
         }
     }
 }

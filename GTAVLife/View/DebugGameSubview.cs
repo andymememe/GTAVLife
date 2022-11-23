@@ -1,13 +1,13 @@
 using System.Collections.Generic;
 using LemonUI.Menus;
+using GTAVLife.Helper;
 using GTAVLife.Controller;
 using GTAVLife.GameData;
 
 namespace GTAVLife.View
 {
-    public class DebugGameSubview : IView
+    public class DebugGameSubview : SimpleSingletonBase<DebugGameSubview>, IView
     {
-        private static DebugGameSubview instance = null;
         private DebugController controller;
         private Dictionary<string, string> items = new Dictionary<string, string>
         {
@@ -19,14 +19,6 @@ namespace GTAVLife.View
 
         // UI
         private NativeMenu menu;
-
-        public static DebugGameSubview Instance
-        {
-            get
-            {
-                return instance ?? new DebugGameSubview();
-            }
-        }
 
         public NativeMenu Menu
         {
@@ -49,7 +41,8 @@ namespace GTAVLife.View
             {
                 object rawTag = menu.Items[i].Tag;
 
-                if (rawTag != null) {
+                if (rawTag != null)
+                {
                     string tag = (string)rawTag;
                     string result = getResult(tag);
                     menu.Items[i].AltTitle = result;
@@ -59,7 +52,7 @@ namespace GTAVLife.View
 
         public void SetController(IController controller)
         {
-            this.controller = (DebugController) controller;
+            this.controller = (DebugController)controller;
         }
 
         public void Show()
@@ -96,9 +89,8 @@ namespace GTAVLife.View
         }
 
         private DebugGameSubview()
-        {  
+        {
             setupUI();
-            instance = this;
         }
     }
 }

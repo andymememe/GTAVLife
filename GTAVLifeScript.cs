@@ -26,10 +26,13 @@ public class GTAVLifeScript : Script
 
         foreach (IController controller in router.Controllers)
         {
-            objectPool.Add(controller.View.Menu);
-            foreach (NativeMenu submenu in controller.View.Submenus)
+            if (controller.View != null)
             {
-                objectPool.Add(submenu);
+                objectPool.Add(controller.View.Menu);
+                foreach (NativeMenu submenu in controller.View.Submenus)
+                {
+                    objectPool.Add(submenu);
+                }
             }
         }
 

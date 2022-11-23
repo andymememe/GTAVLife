@@ -22,4 +22,6 @@ Make immersive experience in Los Santos
 - Random Event
   - New Random Events
 - Activities
-  - Yoga, Gym, Hunting, etc.
+  - Hunting, etc.
+- Living
+  - Buy Tram Ticket, Food, Gasoline, etc.

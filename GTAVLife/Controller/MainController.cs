@@ -1,20 +1,11 @@
-using GTAVLife.Helper;
 using GTAVLife.View;
+using GTAVLife.Helper;
 
 namespace GTAVLife.Controller
 {
-    public class MainController : IController
+    public class MainController : SimpleSingletonBase<MainController>, IController
     {
-        private static MainController instance = null;
         private MainView mainView;
-
-        public static MainController Instance
-        {
-            get
-            {
-                return instance ?? new MainController();
-            }
-        }
 
         public IView View
         {
@@ -29,7 +20,7 @@ namespace GTAVLife.Controller
             mainView.Show();
         }
 
-        public void OnHide()
+        public void Hide()
         {
             mainView.Hide();
         }
@@ -43,7 +34,6 @@ namespace GTAVLife.Controller
         {
             mainView = MainView.Instance;
             mainView.SetController(this);
-            instance = this;
         }
     }
 }

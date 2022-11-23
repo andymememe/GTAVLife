@@ -6,7 +6,7 @@ namespace GTAVLife.Controller
     {
         IView View { get; }
         void Show();
-        void OnHide();
+        void Hide();
         void Process();
     }
 }

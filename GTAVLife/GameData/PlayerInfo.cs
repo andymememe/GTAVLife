@@ -45,7 +45,7 @@ namespace GTAVLife.GameData
             }
         }
 
-        public static Vehicle Vehicle
+        public static GTA.Vehicle Vehicle
         {
             get
             {
@@ -106,46 +106,11 @@ namespace GTAVLife.GameData
             }
         }
 
-        public static Vehicle NearestVehicle
+        public static GTA.Vehicle NearestVehicle
         {
             get
             {
                 return World.GetClosestVehicle(Character.Position, 3f);
-            }
-        }
-
-        public static void DrawMarkerOnNearestPed()
-        {
-            if (NearestPed != null)
-            {
-                World.DrawLightWithRange(NearestPed.Position, Color.Aqua, 6f, 1f);
-            }
-        }
-
-        public static void DrawMarkerOnNearestVehicle()
-        {
-            if (NearestVehicle != null)
-            {
-                World.DrawLightWithRange(NearestVehicle.Position, Color.Red, 6f, 1f);
-            }
-        }
-
-        public static void DrawMarkerOnAimingTarget()
-        {
-            if (Player.IsAiming)
-            {
-                RaycastResult result = World.GetCrosshairCoordinates(IntersectFlags.Objects);
-                if (result.HitEntity != null && result.HitEntity.Exists())
-                {
-                    string msg = String.Format(
-                        "{0} ({1})",
-                        result.HitEntity.Model.GetHashCode(),
-                        result.HitEntity.Health
-                    );
-
-                    Screen.ShowSubtitle(msg, 5000);
-                    World.DrawLightWithRange(result.HitEntity.Position, Color.LimeGreen, 6f, 1f);
-                }
             }
         }
     }

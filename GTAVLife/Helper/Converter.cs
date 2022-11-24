@@ -1,6 +1,7 @@
 namespace GTAVLife.Helper
 {
-    public class Distance {
+    public class Distance
+    {
         private const float MM_PER_GAME_WORLD_DISTANCE = 800f;
 
         public static float ToMM(float gameWorldDist)

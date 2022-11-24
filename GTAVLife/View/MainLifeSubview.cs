@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using GTA.UI;
 using GTAVLife.GameData;
-using GTAVLife.Controller;
 using GTAVLife.Helper;
 using LemonUI.Menus;
 
@@ -19,10 +18,8 @@ namespace GTAVLife.View
 
         public List<NativeMenu> Submenus => throw new System.NotImplementedException();
 
-        public event ControllerHandler OnSetController;
         public event ProcessHandler OnProcess;
         private NativeMenu menu;
-        private MainController controller;
         private Dictionary<string, string> items = new Dictionary<string, string>
         {
             {"TrainTicket", "Train Ticket"},
@@ -48,12 +45,6 @@ namespace GTAVLife.View
                 }
             }
             OnProcess?.Invoke();
-        }
-
-        public void SetController(IController controller)
-        {
-            this.controller = (MainController)controller;
-            OnSetController?.Invoke(controller);
         }
 
         public void Show()

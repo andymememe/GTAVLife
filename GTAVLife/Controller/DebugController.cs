@@ -28,16 +28,19 @@ namespace GTAVLife.Controller
 
         public void Process()
         {
-            PlayerInfo.DrawMarkerOnNearestPed();
-            PlayerInfo.DrawMarkerOnNearestVehicle();
-            PlayerInfo.DrawMarkerOnAimingTarget();
+            Drawer.DrawMarkerOnPed(PlayerInfo.NearestPed);
+            Drawer.DrawMarkerOnVehicle(PlayerInfo.NearestVehicle);
+            if (PlayerInfo.Player.IsAiming)
+            {
+                Drawer.DrawMarkerOnAimingTarget();
+            }
+            
             debugView.Process();
         }
 
         private DebugController()
         {
             debugView = DebugView.Instance;
-            debugView.SetController(this);
         }
     }
 }

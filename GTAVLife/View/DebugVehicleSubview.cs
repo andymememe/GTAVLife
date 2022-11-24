@@ -2,17 +2,14 @@ using System.Collections.Generic;
 using System;
 using LemonUI.Menus;
 using GTAVLife.Helper;
-using GTAVLife.Controller;
 using GTAVLife.GameData;
 
 namespace GTAVLife.View
 {
     public class DebugVehicleSubview : SimpleSingletonBase<DebugVehicleSubview>, IView
     {
-        public event ControllerHandler OnSetController;
         public event ProcessHandler OnProcess;
         private NativeMenu menu;
-        private DebugController controller;
         private Dictionary<string, string> items = new Dictionary<string, string>
         {
             {"Name", "Name"},
@@ -22,6 +19,10 @@ namespace GTAVLife.View
             {"Health", "Health"},
             {"MaxHealth", "Max Health"},
             {"EngineHealth", "Engine Health"},
+            {"FuelLevel", "Fuel Level"},
+            {"OilLevel", "Oil Level"},
+            {"OilVolume", "Oil Volume"},
+            {"PetrolTankVolume", "Petrol Tank Volume"},
             {"Speed", "Speed"},
             {"Doors", "Doors"},
             {"PassengerCapacity", "Passenger Capacity"},
@@ -59,12 +60,6 @@ namespace GTAVLife.View
             OnProcess?.Invoke();
         }
 
-        public void SetController(IController controller)
-        {
-            this.controller = (DebugController)controller;
-            OnSetController?.Invoke(controller);
-        }
-
         public void Show()
         {
             this.menu.Visible = true;
@@ -90,6 +85,14 @@ namespace GTAVLife.View
                         return PlayerInfo.Vehicle.MaxHealth.ToString();
                     case "EngineHealth":
                         return PlayerInfo.Vehicle.EngineHealth.ToString();
+                    case "FuelLevel":
+                        return PlayerInfo.Vehicle.FuelLevel.ToString();
+                    case "OilLevel":
+                        return PlayerInfo.Vehicle.OilLevel.ToString();
+                    case "OilVolume":
+                        return PlayerInfo.Vehicle.OilVolume.ToString();
+                    case "PetrolTankVolume":
+                        return PlayerInfo.Vehicle.HandlingData.PetrolTankVolume.ToString();
                     case "Speed":
                         return Math.Round((PlayerInfo.Vehicle.Speed * 3.6)).ToString();
                     case "Doors":

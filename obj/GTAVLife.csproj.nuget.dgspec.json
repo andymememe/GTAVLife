@@ -42,6 +42,10 @@
               "target": "Package",
               "version": "[1.9.1, )"
             },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.2, )"
+            },
             "ScriptHookVDotNet3": {
               "target": "Package",
               "version": "[3.5.1, )"

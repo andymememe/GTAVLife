@@ -16,17 +16,20 @@ namespace GTAVLife.Helper
     public class Logger
     {
         private static Logger instance = null;
-        private string path = string.Empty;
+        private string path;
         private LogLevel loglevel = LogLevel.Debug;
 
         public static Logger GetInstance()
         {
-            if (instance == null) {
+            if (instance == null)
+            {
                 throw new InvalidOperationException("logger instance is not initialized");
             }
-            
+
             return instance;
         }
+
+        public string Path => path;
 
         public static Logger GetInstance(string path, LogLevel logLevel)
         {
@@ -60,11 +63,7 @@ namespace GTAVLife.Helper
 
         private Logger(string path, LogLevel logLevel)
         {
-            if (path == string.Empty)
-            {
-                this.path = path;
-            }
-
+            this.path = path;
             this.loglevel = logLevel;
             instance = this;
         }

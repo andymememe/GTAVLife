@@ -33,7 +33,6 @@ namespace GTAVLife.Controller
         private MainController()
         {
             mainView = MainView.Instance;
-            mainView.SetController(this);
         }
     }
 }

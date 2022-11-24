@@ -1,16 +1,13 @@
 using System.Collections.Generic;
 using LemonUI.Menus;
 using GTAVLife.Helper;
-using GTAVLife.Controller;
 using GTAVLife.GameData;
 
 namespace GTAVLife.View
 {
     public class DebugGameSubview : SimpleSingletonBase<DebugGameSubview>, IView
     {
-        public event ControllerHandler OnSetController;
         public event ProcessHandler OnProcess;
-        private DebugController controller;
         private Dictionary<string, string> items = new Dictionary<string, string>
         {
             {"IsMissionActive", "Mission Active"},
@@ -51,12 +48,6 @@ namespace GTAVLife.View
                 }
             }
             OnProcess?.Invoke();
-        }
-
-        public void SetController(IController controller)
-        {
-            this.controller = (DebugController)controller;
-            OnSetController?.Invoke(controller);
         }
 
         public void Show()

@@ -16,11 +16,18 @@ public class GTAVLifeScript : Script
     // Game Related
     private Router router;
     private Logger logger;
+    private Save save;
+    private SaveManager saveManager;
 
     public GTAVLifeScript()
     {
-        string[] loggerPath = new string[] { BaseDirectory, "GTAVLifeScript.log" };
+        string[] loggerPath = new string[] { BaseDirectory, "script", "GTAVLifeScript.log" };
         logger = Logger.GetInstance(Path.Combine(loggerPath), LogLevel.Debug);
+        
+        string[] savePath = new string[] { BaseDirectory, "GTAVLifeScript.json" };
+        save = Save.GetInstance(Path.Combine(savePath));
+        saveManager = SaveManager.GetInstance(save);
+
         router = Router.Instance;
         objectPool = new ObjectPool();
 
@@ -47,16 +54,13 @@ public class GTAVLifeScript : Script
             Gate.ControlGate();
             ScriptTerminator.DisableRestrictedZone();
             ScriptTerminator.DisableVendingMachine();
-            RelationshipHelper.MakeFriendly(RelationshipGroupHash.ARMY);
-            RelationshipHelper.MakeFriendly(RelationshipGroupHash.COP);
-            RelationshipHelper.MakeFriendly(RelationshipGroupHash.MEDIC);
-            RelationshipHelper.MakeFriendly(RelationshipGroupHash.FIREMAN);
         }
         else
         {
             objectPool.HideAll();
         }
 
+        saveManager.Process();
         router.Process();
         objectPool.Process();
     }

@@ -5,6 +5,7 @@ using GTA;
 using LemonUI;
 using LemonUI.Menus;
 using GTAVLife;
+using GTAVLife.GameData;
 using GTAVLife.Controller;
 using GTAVLife.Helper;
 
@@ -23,7 +24,7 @@ public class GTAVLifeScript : Script
     {
         string[] loggerPath = new string[] { BaseDirectory, "script", "GTAVLifeScript.log" };
         logger = Logger.GetInstance(Path.Combine(loggerPath), LogLevel.Debug);
-        
+
         string[] savePath = new string[] { BaseDirectory, "GTAVLifeScript.json" };
         save = Save.GetInstance(Path.Combine(savePath));
         saveManager = SaveManager.GetInstance(save);
@@ -51,9 +52,13 @@ public class GTAVLifeScript : Script
     {
         if (isFreeAndPlayable())
         {
-            Gate.ControlGate();
-            ScriptTerminator.DisableRestrictedZone();
-            ScriptTerminator.DisableVendingMachine();
+            if (Life.Instance.IsActivate)
+            {
+                Gate.ControlGate();
+                // ScriptTerminator.DisableRestrictedZone();
+                // ScriptTerminator.DisableVendingMachine();
+                ScriptTerminator.DisableEverything();
+            }
         }
         else
         {
@@ -71,14 +76,8 @@ public class GTAVLifeScript : Script
         {
             if (isFreeAndPlayable())
             {
-                if (!objectPool.AreAnyVisible)
-                {
-                    router.Route("main");
-                }
-                else
-                {
-                    router.Route("hide");
-                }
+                objectPool.HideAll();
+                router.Route("main");
             }
             else
             {
@@ -89,14 +88,8 @@ public class GTAVLifeScript : Script
         // Debug
         if (e.KeyCode == Keys.F11)
         {
-            if (!objectPool.AreAnyVisible)
-            {
-                router.Route("debug");
-            }
-            else
-            {
-                router.Route("hide");
-            }
+            objectPool.HideAll();
+            router.Route("debug");
         }
     }
 

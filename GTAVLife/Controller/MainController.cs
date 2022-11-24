@@ -20,11 +20,6 @@ namespace GTAVLife.Controller
             mainView.Show();
         }
 
-        public void Hide()
-        {
-            mainView.Hide();
-        }
-
         public void Process()
         {
             mainView.Process();

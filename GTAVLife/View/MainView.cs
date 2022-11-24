@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using GTA.UI;
 using LemonUI.Menus;
+using GTAVLife.GameData;
 using GTAVLife.Helper;
 
 namespace GTAVLife.View
@@ -35,14 +36,43 @@ namespace GTAVLife.View
             this.menu.Visible = true;
         }
 
-        public void Hide()
-        {
-            this.menu.Visible = false;
-        }
-
         public void Process()
         {
+            if (Life.Instance.IsActivate)
+            {
+                Activate();
+            }
+            else
+            {
+                Deactivate();
+            }
             OnProcess?.Invoke();
+        }
+
+        public void Activate()
+        {
+            foreach (NativeItem item in this.menu)
+            {
+                if (item.Tag != null && item.Tag.ToString() == "activate")
+                {
+                    continue;
+                }
+
+                item.Enabled = true;
+            }
+        }
+
+        public void Deactivate()
+        {
+            foreach (NativeItem item in this.menu)
+            {
+                if (item.Tag != null && item.Tag.ToString() == "activate")
+                {
+                    continue;
+                }
+
+                item.Enabled = false;
+            }
         }
 
         public void OnItemActivated(object sender, ItemActivatedArgs e)
@@ -50,7 +80,6 @@ namespace GTAVLife.View
             if (e.Item.Tag != null)
             {
                 string tag = e.Item.Tag.ToString();
-                Screen.ShowSubtitle(tag);
                 switch (tag)
                 {
                     default:
@@ -61,7 +90,19 @@ namespace GTAVLife.View
 
         public void OnCheckboxChanged(object sender, EventArgs e)
         {
-            NativeCheckboxItem checkboxItem = (NativeCheckboxItem) sender;
+            NativeCheckboxItem checkboxItem = (NativeCheckboxItem)sender;
+            if (checkboxItem.Tag != null)
+            {
+                string tag = checkboxItem.Tag.ToString();
+                switch (tag)
+                {
+                    case "activate":
+                        Life.Instance.IsActivate = checkboxItem.Checked;
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
         private MainView()
@@ -76,7 +117,7 @@ namespace GTAVLife.View
             // Activate
             NativeCheckboxItem checkboxItem = new NativeCheckboxItem("Activate");
             checkboxItem.CheckboxChanged += this.OnCheckboxChanged;
-            checkboxItem.AltTitle = "activate";
+            checkboxItem.Tag = "activate";
             this.menu.Add(checkboxItem);
 
             this.submenus = new List<NativeMenu>();

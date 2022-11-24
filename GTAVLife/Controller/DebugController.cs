@@ -21,11 +21,6 @@ namespace GTAVLife.Controller
             debugView.Show();
         }
 
-        public void Hide()
-        {
-            debugView.Hide();
-        }
-
         public void Process()
         {
             Drawer.DrawMarkerOnPed(PlayerInfo.NearestPed);

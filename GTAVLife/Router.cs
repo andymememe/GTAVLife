@@ -3,12 +3,10 @@ using GTAVLife.Controller;
 
 namespace GTAVLife
 {
-    public delegate void HideHandler();
     public delegate void ProcessHandler();
 
     public class Router : SimpleSingletonBase<Router>
     {
-        public event HideHandler OnHide;
         public event ProcessHandler OnProcess;
         private IController[] controllers;
 
@@ -35,9 +33,6 @@ namespace GTAVLife
                 case "debug":
                     DebugController.Instance.Show();
                     break;
-                case "hide":
-                    OnHide?.Invoke();
-                    break;
                 default:
                     break;
             }
@@ -54,7 +49,6 @@ namespace GTAVLife
 
             foreach (IController controller in controllers)
             {
-                this.OnHide += controller.Hide;
                 this.OnProcess += controller.Process;
             }
         }

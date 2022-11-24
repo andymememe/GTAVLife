@@ -7,11 +7,6 @@ namespace GTAVLife.Controller
     {
         public IView View => null;
 
-        public void Hide()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public void Process()
         {
             throw new System.NotImplementedException();

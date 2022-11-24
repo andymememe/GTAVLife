@@ -11,7 +11,6 @@ namespace GTAVLife.View
         NativeMenu Menu { get; }
         List<NativeMenu> Submenus { get; }
         void Show();
-        void Hide();
         void Process();
     }
 }

@@ -29,11 +29,6 @@ namespace GTAVLife.View
             }
         }
 
-        public void Hide()
-        {
-            this.menu.Visible = false;
-        }
-
         public void Show()
         {
             this.menu.Visible = true;

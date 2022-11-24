@@ -39,11 +39,6 @@ namespace GTAVLife.View
 
         public List<NativeMenu> Submenus => throw new System.NotImplementedException();
 
-        public void Hide()
-        {
-            this.menu.Visible = false;
-        }
-
         public void Process()
         {
             for (int i = 0; i < menu.Items.Count; i++)

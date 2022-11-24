@@ -18,6 +18,20 @@ namespace GTAVLife.GameData
             }
         }
 
+        [JsonIgnore]
+        public bool IsActivate {
+            get
+            {
+                return isActivate;
+            }
+
+            set
+            {
+                isActivate = value;
+                isDirty = true;
+            }
+        }
+
         public bool HasTAPCard
         {
             get
@@ -73,6 +87,7 @@ namespace GTAVLife.GameData
         private bool hasTrainTicket;
         private List<VehicleInfo> ownedVehicles;
         private bool isDirty;
+        private bool isActivate;
 
         public void AddOwnedCar(VehicleInfo vehicle)
         {
@@ -96,9 +111,12 @@ namespace GTAVLife.GameData
 
         private Life()
         {
+            this.isActivate = false;
+
             this.hasTAPCard = false;
             this.hasTrainTicket = false;
             this.isDirty = true;
+            
             instance = this;
         }
     }

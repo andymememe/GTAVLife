@@ -55,8 +55,6 @@ public class GTAVLifeScript : Script
             if (Life.Instance.IsActivate)
             {
                 Gate.ControlGate();
-                // ScriptTerminator.DisableRestrictedZone();
-                // ScriptTerminator.DisableVendingMachine();
                 ScriptTerminator.DisableEverything();
             }
         }

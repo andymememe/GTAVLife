@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using GTA.Math;
@@ -44,11 +45,21 @@ namespace GTAVLife.GameData
 
         public void AddTestPlayerEntryPoint(string name, Vector3 pos, Vector3 pointTo)
         {
+            if (name == null)
+            {
+                DateTime dt = DateTime.Now;
+                name = string.Format("TestPlayer_{0}", dt.Ticks);
+            }
             this.EntryPoints.Add(new EntryPoint(name, pos, pointTo, PointType.Player, Color.Red));
         }
 
         public void AddTestVehicleEntryPoint(string name, Vector3 pos, Vector3 pointTo)
         {
+            if (name == null)
+            {
+                DateTime dt = DateTime.Now;
+                name = string.Format("TestVehicle_{0}", dt.Ticks);
+            }
             this.EntryPoints.Add(new EntryPoint(name, pos, pointTo, PointType.Vehicle, Color.Blue));
         }
 

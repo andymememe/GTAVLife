@@ -1,9 +1,14 @@
 using GTA;
+using GTA.Math;
 
 namespace GTAVLife.GameData
 {
     public class VehicleInfo
     {
+        public string NickName { get; set; }
+        public bool NeedSpawn { get; set; }
+        public Vector3 SpawnPosition { get; set; }
+        public float SpawnHeading { get; set; }
         public string Name { get; set; }
         public int Hash { get; set; }
         public int WheelType { get; set; }
@@ -16,13 +21,24 @@ namespace GTAVLife.GameData
         public int TrimColor { get; set; }
         public int WindowTint { get; set; }
 
-        public Vehicle SpawnVehicle()
+        public Vehicle ModVehicle(Vehicle vehicle)
         {
-            return null;
+            vehicle.Mods.WheelType = (VehicleWheelType) WheelType;
+            vehicle.Mods.LicensePlate = Plate;
+            vehicle.Mods.LicensePlateStyle = (LicensePlateStyle) LicensePlateStyle;
+            vehicle.Mods.PrimaryColor = (VehicleColor) PrimaryColor;
+            vehicle.Mods.SecondaryColor = (VehicleColor) SecondaryColor;
+            vehicle.Mods.PearlescentColor = (VehicleColor) PearlescentColor;
+            vehicle.Mods.RimColor = (VehicleColor) RimColor;
+            vehicle.Mods.TrimColor = (VehicleColor) TrimColor;
+            vehicle.Mods.WindowTint = (VehicleWindowTint) WindowTint;
+
+            return vehicle;
         }
 
-        public VehicleInfo(Vehicle vehicle)
+        public VehicleInfo(Vehicle vehicle, string nickname)
         {
+            NickName = nickname;
             Hash = vehicle.Model.Hash;
             Name = vehicle.DisplayName;
             WheelType = (int)vehicle.Mods.WheelType;

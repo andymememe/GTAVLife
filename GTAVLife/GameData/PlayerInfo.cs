@@ -1,12 +1,10 @@
 using System;
 using GTA;
 using GTA.Math;
-using GTA.UI;
-using System.Drawing;
 
 namespace GTAVLife.GameData
 {
-    class PlayerInfo
+    public class PlayerInfo
     {
         public static Player Player
         {

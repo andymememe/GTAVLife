@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using GTAVLife.Helper;
 using GTAVLife.Controller;
 
@@ -8,9 +9,9 @@ namespace GTAVLife
     public class Router : SimpleSingletonBase<Router>
     {
         public event ProcessHandler OnProcess;
-        private IController[] controllers;
+        private List<IController> controllers;
 
-        public IController[] Controllers
+        public List<IController> Controllers
         {
             get
             {
@@ -41,10 +42,14 @@ namespace GTAVLife
 
         private Router()
         {
-            this.controllers = new IController[] {
+            this.controllers = new List<IController> {
                 MainController.Instance,
                 DebugController.Instance,
                 TrainController.Instance,
+                EntryPointController.Instance,
+                InventoryController.Instance,
+                CarShopController.Instance,
+                CarSpawnerController.Instance,
             };
 
             foreach (IController controller in controllers)

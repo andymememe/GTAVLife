@@ -75,7 +75,7 @@ namespace GTAVLife.View
                 case "Y":
                     return PlayerInfo.Position.Y.ToString();
                 case "Z":
-                    return PlayerInfo.Position.Z.ToString();
+                    return PlayerInfo.Position.Z.ToString();;
                 case "Name":
                     return PlayerInfo.Name;
                 case "Health":
@@ -138,6 +138,21 @@ namespace GTAVLife.View
             }
         }
 
+        private void OnActivate(object sender, ItemActivatedArgs e)
+        {
+            switch((string)e.Item.Tag)
+            {
+                case "Zone":
+                case "NearestPedName":
+                case "NearestPedRelationshipGroup":
+                case "NearestVehicle":
+                    Logger.GetInstance().Info(e.Item.AltTitle);
+                    break;
+                default:
+                    break;
+            }
+        }
+
         private void setupUI()
         {
             this.menu = new NativeMenu("Debug", "Player Stats");
@@ -147,6 +162,7 @@ namespace GTAVLife.View
                 nativeItem.Tag = item.Key;
                 menu.Add(nativeItem);
             }
+            this.menu.ItemActivated += OnActivate;
         }
 
         private DebugPlayerSubview()

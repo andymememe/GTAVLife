@@ -36,29 +36,34 @@ namespace GTAVLife.Helper
             return instance ?? new Logger(path, logLevel);
         }
 
-        public void Debug(string content, [CallerMemberName] string callerName = "")
+        public void Raw(string content)
         {
-            writeToFile(content, LogLevel.Debug, callerName);
+            writeToFileRaw(content);
         }
 
-        public void Info(string content, [CallerMemberName] string callerName = "")
+        public void Debug(string content, [CallerFilePath] string callerPath = "", [CallerLineNumber] int callerLineNo = -1, [CallerMemberName] string callerName = "")
         {
-            writeToFile(content, LogLevel.Info, callerName);
+            writeToFile(content, LogLevel.Debug, callerPath, callerLineNo, callerName);
         }
 
-        public void Warning(string content, [CallerMemberName] string callerName = "")
+        public void Info(string content, [CallerFilePath] string callerPath = "", [CallerLineNumber] int callerLineNo = -1, [CallerMemberName] string callerName = "")
         {
-            writeToFile(content, LogLevel.Warning, callerName);
+            writeToFile(content, LogLevel.Info, callerPath, callerLineNo, callerName);
         }
 
-        public void Error(string content, [CallerMemberName] string callerName = "")
+        public void Warning(string content, [CallerFilePath] string callerPath = "", [CallerLineNumber] int callerLineNo = -1, [CallerMemberName] string callerName = "")
         {
-            writeToFile(content, LogLevel.Error, callerName);
+            writeToFile(content, LogLevel.Warning, callerPath, callerLineNo, callerName);
         }
 
-        public void Panic(string content, [CallerMemberName] string callerName = "")
+        public void Error(string content, [CallerFilePath] string callerPath = "", [CallerLineNumber] int callerLineNo = -1, [CallerMemberName] string callerName = "")
         {
-            writeToFile(content, LogLevel.Panic, callerName);
+            writeToFile(content, LogLevel.Error, callerPath, callerLineNo, callerName);
+        }
+
+        public void Panic(string content, [CallerFilePath] string callerPath = "", [CallerLineNumber] int callerLineNo = -1, [CallerMemberName] string callerName = "")
+        {
+            writeToFile(content, LogLevel.Panic, callerPath, callerLineNo, callerName);
         }
 
         private Logger(string path, LogLevel logLevel)
@@ -68,14 +73,19 @@ namespace GTAVLife.Helper
             instance = this;
         }
 
-        private void writeToFile(string content, LogLevel logLevel, string callerName)
+        private void writeToFile(string content, LogLevel logLevel, string callerPath, int callerLineNo, string callerName)
         {
             if (logLevel <= this.loglevel)
             {
                 DateTime now = DateTime.Now;
-                string formatString = string.Format("[{0}][{1}][{2}]{3}", now, callerName, logLevel.ToString(), content);
-                File.AppendAllText(this.path, content);
+                string formatString = string.Format("[{0}][{1}:{2}][{3}][{4}]{5}\n", now, callerPath, callerLineNo, callerName, logLevel.ToString(), content);
+                File.AppendAllText(this.path, formatString);
             }
+        }
+
+        private void writeToFileRaw(string content)
+        {
+            File.AppendAllText(this.path, content);
         }
     }
 }

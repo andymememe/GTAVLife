@@ -22,7 +22,7 @@ public class GTAVLifeScript : Script
 
     public GTAVLifeScript()
     {
-        string[] loggerPath = new string[] { BaseDirectory, "script", "GTAVLifeScript.log" };
+        string[] loggerPath = new string[] { BaseDirectory, "GTAVLifeScript.log" };
         logger = Logger.GetInstance(Path.Combine(loggerPath), LogLevel.Debug);
 
         string[] savePath = new string[] { BaseDirectory, "GTAVLifeScript.json" };

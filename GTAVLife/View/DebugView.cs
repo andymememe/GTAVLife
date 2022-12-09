@@ -44,7 +44,8 @@ namespace GTAVLife.View
             IView[] views = {
                 DebugGameSubview.Instance,
                 DebugPlayerSubview.Instance,
-                DebugVehicleSubview.Instance
+                DebugVehicleSubview.Instance,
+                DebugMissionSubview.Instance
             };
 
             this.menu = new NativeMenu("Debug", "View Debug Info");

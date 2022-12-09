@@ -3,7 +3,7 @@ using GTAVLife.View;
 
 namespace GTAVLife.Controller
 {
-    public class InventoryController : SimpleSingletonBase<InventoryController>, IController
+    public class CarShopController : SimpleSingletonBase<CarShopController>, IController
     {
         public IView View => null;
 

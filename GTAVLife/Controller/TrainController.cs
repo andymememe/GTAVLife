@@ -10,13 +10,7 @@ namespace GTAVLife.Controller
         private const int TRAINTICKET02 = -455396574;
         private static Model[] trainTicketIDs = { TRAINTICKET01, TRAINTICKET02 };
 
-        public IView View
-        {
-            get
-            {
-                return null;
-            }
-        }
+        public IView View => null;
 
         public void Process()
         {

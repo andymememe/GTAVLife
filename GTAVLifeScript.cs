@@ -37,9 +37,12 @@ public class GTAVLifeScript : Script
             if (controller.View != null)
             {
                 objectPool.Add(controller.View.Menu);
-                foreach (NativeMenu submenu in controller.View.Submenus)
+                if (controller.View.Submenus != null)
                 {
-                    objectPool.Add(submenu);
+                    foreach (NativeMenu submenu in controller.View.Submenus)
+                    {
+                        objectPool.Add(submenu);
+                    }
                 }
             }
         }

@@ -12,22 +12,9 @@ namespace GTAVLife.View
         private NativeMenu menu;
         private List<NativeMenu> submenus;
 
-        public NativeMenu Menu
-        {
-            get
-            {
-                return menu;
-            }
+        public NativeMenu Menu => menu;
 
-        }
-
-        public List<NativeMenu> Submenus
-        {
-            get
-            {
-                return submenus;
-            }
-        }
+        public List<NativeMenu> Submenus => submenus;
 
         public void Show()
         {

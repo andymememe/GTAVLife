@@ -1,5 +1,6 @@
 using GTA;
 using GTA.UI;
+using GTA.Math;
 using System;
 using System.Drawing;
 
@@ -7,20 +8,9 @@ namespace GTAVLife.Helper
 {
     public class Drawer
     {
-        public static void DrawMarkerOnPed(Ped ped)
+        public static void DrawMarkerOnEntity(Vector3 entityPos, Color color)
         {
-            if (ped != null)
-            {
-                World.DrawLightWithRange(ped.Position, Color.Aqua, 6f, 1f);
-            }
-        }
-
-        public static void DrawMarkerOnVehicle(Vehicle vehicle)
-        {
-            if (vehicle != null)
-            {
-                World.DrawLightWithRange(vehicle.Position, Color.Red, 6f, 1f);
-            }
+            World.DrawMarker(MarkerType.UpsideDownCone, entityPos + (Vector3.WorldUp * 0.5f), Vector3.Zero, Vector3.Zero, new Vector3(.3f, .3f, .3f), color, bobUpAndDown: true, faceCamera: false, drawOnEntity: false);
         }
 
         public static void DrawMarkerOnAimingTarget()
@@ -35,7 +25,7 @@ namespace GTAVLife.Helper
                 );
 
                 Screen.ShowSubtitle(msg, 5000);
-                World.DrawLightWithRange(result.HitEntity.Position, Color.LimeGreen, 6f, 1f);
+                World.DrawMarker(MarkerType.UpsideDownCone, result.HitEntity.AbovePosition + (Vector3.WorldUp * 0.5f), Vector3.Zero, Vector3.Zero, new Vector3(.3f, .3f, .3f), Color.LimeGreen, bobUpAndDown: true, faceCamera: false, drawOnEntity: false);
             }
         }
     }

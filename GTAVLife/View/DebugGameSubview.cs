@@ -19,15 +19,9 @@ namespace GTAVLife.View
         // UI
         private NativeMenu menu;
 
-        public NativeMenu Menu
-        {
-            get
-            {
-                return menu;
-            }
-        }
+        public NativeMenu Menu => menu;
 
-        public List<NativeMenu> Submenus => throw new System.NotImplementedException();
+        public List<NativeMenu> Submenus => null;
 
         public void Process()
         {

@@ -12,7 +12,7 @@ namespace GTAVLife.View
     {
         public NativeMenu Menu => menu;
 
-        public List<NativeMenu> Submenus => throw new System.NotImplementedException();
+        public List<NativeMenu> Submenus => null;
 
         public event ProcessHandler OnProcess;
 

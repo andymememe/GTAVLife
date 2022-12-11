@@ -43,10 +43,10 @@ namespace GTAVLife.View
             switch((string)e.Item.Tag)
             {
                 case "SetPlayerCheckpoint":
-                    EntryPointList.Instance.AddTestPlayerEntryPoint(null, PlayerInfo.Character.BelowPosition, PlayerInfo.Character.BelowPosition);
+                    EntryPointList.Instance.AddTestPlayerEntryPoint(PlayerInfo.Character.BelowPosition, PlayerInfo.Character.BelowPosition);
                     break;
                 case "SetVehicleCheckpoint":
-                    EntryPointList.Instance.AddTestVehicleEntryPoint(null, PlayerInfo.Character.BelowPosition, PlayerInfo.Character.BelowPosition);
+                    EntryPointList.Instance.AddTestVehicleEntryPoint(PlayerInfo.Character.BelowPosition, PlayerInfo.Character.BelowPosition);
                     break;
                 case "RemoveAll":
                     EntryPointList.Instance.RemoveAllEntryPoint();

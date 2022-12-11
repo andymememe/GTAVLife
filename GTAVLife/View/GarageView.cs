@@ -16,7 +16,7 @@ namespace GTAVLife.View
 
         public void Process()
         {
-            
+            OnProcess?.Invoke();
         }
 
         public void Show()

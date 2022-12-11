@@ -14,6 +14,13 @@ namespace GTAVLife.GameData
         TestVehicle
     }
 
+    public enum EntryType
+    {
+        Player,
+        Vehicle,
+        TowedVehicle,
+    }
+
     public enum EntryPointStatus
     {
         Delete = -2,
@@ -25,7 +32,7 @@ namespace GTAVLife.GameData
     public class EntryPoint
     {
         public string Name { get; }
-        public bool ForVehicle { get; }
+        public EntryType EntryType { get; }
         public PointType PointType { get; }
         public EntryPointStatus Status { get; set; }
         public Vector3 Position { get; }
@@ -35,11 +42,11 @@ namespace GTAVLife.GameData
         public Checkpoint Checkpoint { get; set; }
         public Blip Blip { get; set; }
 
-        public EntryPoint(string name, PointType pointType, bool forVehicle, Vector3 position, Vector3 pointTo, Color color, BlipSprite blipSprite)
+        public EntryPoint(string name, PointType pointType, EntryType entryType, Vector3 position, Vector3 pointTo, Color color, BlipSprite blipSprite)
         {
             this.Name = name;
             this.PointType = pointType;
-            this.ForVehicle = forVehicle;
+            this.EntryType = entryType;
             this.BlipSpirte = blipSprite;
             this.Position = position;
             this.PointTo = pointTo;
@@ -53,29 +60,30 @@ namespace GTAVLife.GameData
     public class EntryPointList : SimpleSingletonBase<EntryPointList>
     {   public List<EntryPoint> EntryPoints { get; }
 
-        public void AddTestPlayerEntryPoint(string name, Vector3 pos, Vector3 pointTo)
+        public void AddTestPlayerEntryPoint(Vector3 pos, Vector3 pointTo)
         {
-            if (name == null)
-            {
-                DateTime dt = DateTime.Now;
-                name = string.Format("TestPlayer_{0}", dt.Ticks);
-            }
-            this.EntryPoints.Add(new EntryPoint(name, PointType.TestPlayer, true, pos, pointTo, Color.Red, BlipSprite.CaptureAmericanFlag));
+            DateTime dt = DateTime.Now;
+            String name = string.Format("TestPlayer_{0}", dt.Ticks);
+
+            this.EntryPoints.Add(new EntryPoint(name, PointType.TestPlayer, EntryType.Player, pos, pointTo, Color.Red, BlipSprite.CaptureAmericanFlag));
         }
 
-        public void AddTestVehicleEntryPoint(string name, Vector3 pos, Vector3 pointTo)
+        public void AddTestVehicleEntryPoint(Vector3 pos, Vector3 pointTo)
         {
-            if (name == null)
-            {
-                DateTime dt = DateTime.Now;
-                name = string.Format("TestVehicle_{0}", dt.Ticks);
-            }
-            this.EntryPoints.Add(new EntryPoint(name, PointType.TestVehicle, false, pos, pointTo, Color.Blue, BlipSprite.CarShowroom));
+            DateTime dt = DateTime.Now;
+            String name = string.Format("TestVehicle_{0}", dt.Ticks);
+            
+            this.EntryPoints.Add(new EntryPoint(name, PointType.TestVehicle, EntryType.Vehicle, pos, pointTo, Color.Blue, BlipSprite.CarShowroom));
         }
 
         public void RemoveAllEntryPoint()
         {
-           foreach (EntryPoint entryPoint in this.EntryPoints)
+           foreach (EntryPoint entryPoint in this.EntryPoints.FindAll(
+                delegate(EntryPoint point)
+                {
+                    return point.Status == EntryPointStatus.Enabled;
+                }
+           ))
            {
                 entryPoint.Status = EntryPointStatus.Delete;
            }

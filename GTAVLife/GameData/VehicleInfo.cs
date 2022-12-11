@@ -1,4 +1,3 @@
-using GTA;
 using GTA.Math;
 
 namespace GTAVLife.GameData
@@ -20,10 +19,13 @@ namespace GTAVLife.GameData
         public int RimColor { get; set; }
         public int TrimColor { get; set; }
         public int WindowTint { get; set; }
+        public string Location { get; set; }
+        public int WantedLevel { get; set; }
 
-        public VehicleInfo(string nickname)
+        public VehicleInfo(string nickname, string location)
         {
             NickName = nickname;
+            Location = location;
         }
     }
 }

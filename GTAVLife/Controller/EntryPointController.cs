@@ -19,9 +19,9 @@ namespace GTAVLife.Controller
                 switch (entryPoint.Status)
                 {
                     case EntryPointStatus.Add:
-                        if (entryPoint.ForVehicle)
+                        if (entryPoint.EntryType == EntryType.Vehicle || entryPoint.EntryType == EntryType.TowedVehicle)
                         {
-                            entryPoint.Checkpoint = MissionHelper.SetVehicleCheckpoint(
+                            entryPoint.Checkpoint = EntryPointHelper.SetVehicleCheckpoint(
                                 entryPoint.Position,
                                 entryPoint.PointTo,
                                 entryPoint.Color
@@ -29,14 +29,14 @@ namespace GTAVLife.Controller
                         }
                         else
                         {
-                            entryPoint.Checkpoint = MissionHelper.SetPlayerCheckpoint(
+                            entryPoint.Checkpoint = EntryPointHelper.SetPlayerCheckpoint(
                                 entryPoint.Position,
                                 entryPoint.PointTo,
                                 entryPoint.Color
                             );
                         }
 
-                        entryPoint.Blip = MissionHelper.SetBlip(
+                        entryPoint.Blip = EntryPointHelper.SetBlip(
                             entryPoint.Position,
                             entryPoint.BlipSpirte,
                             entryPoint.Name
@@ -44,25 +44,40 @@ namespace GTAVLife.Controller
                         entryPoint.Status = EntryPointStatus.Enabled;
                         break;
                     case EntryPointStatus.Delete:
-                        entryPoint.Blip.Delete();
-                        entryPoint.Blip = null;
-                        
-                        entryPoint.Checkpoint.Delete();
-                        entryPoint.Checkpoint = null;
-                        
+                        if (entryPoint.Blip != null && entryPoint.Blip.Exists())
+                        {
+                            entryPoint.Blip.Delete();
+                            entryPoint.Blip = null;
+                        }
+
+                        if (entryPoint.Checkpoint != null && entryPoint.Checkpoint.Exists())
+                        {
+                            entryPoint.Checkpoint.Delete();
+                            entryPoint.Checkpoint = null;
+                        }
+
                         entryPoint.Status = EntryPointStatus.Disabled;
                         break;
                     case EntryPointStatus.Enabled:
-                        if (entryPoint.ForVehicle)
+                        if (entryPoint.EntryType == EntryType.Vehicle)
                         {
-                            if (PlayerInfo.Character.IsInVehicle() && Distance.IsInRange(entryPoint.Position, PlayerInfo.CurrentVehicle.Position, 6000))
+                            if (PlayerInfo.Character.IsInVehicle() && Distance.IsInRange(entryPoint.Position, PlayerInfo.CurrentVehicle.BelowPosition, 1500))
+                            {
+                                Life.Instance.CurrentEntryPointIndex = index;
+                            }
+                        }
+                        else if (entryPoint.EntryType == EntryType.TowedVehicle)
+                        {
+                            if (PlayerInfo.Character.IsInVehicle() &&
+                                PlayerInfo.CurrentVehicle.TowedVehicle != null &&
+                                Distance.IsInRange(entryPoint.Position, PlayerInfo.CurrentVehicle.TowedVehicle.BelowPosition, 1500))
                             {
                                 Life.Instance.CurrentEntryPointIndex = index;
                             }
                         }
                         else
                         {
-                            if (Distance.IsInRange(entryPoint.Position, PlayerInfo.Character.Position, 1000))
+                            if (!PlayerInfo.Character.IsInVehicle() && Distance.IsInRange(entryPoint.Position, PlayerInfo.Character.BelowPosition, 250))
                             {
                                 Life.Instance.CurrentEntryPointIndex = index;
                             }

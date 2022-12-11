@@ -4,7 +4,7 @@ using GTA.Math;
 
 namespace GTAVLife.Helper
 {
-    public class MissionHelper
+    public class EntryPointHelper
     {
         public static Blip SetBlip (Vector3 position, BlipSprite sprite, string name)
         {
@@ -33,29 +33,6 @@ namespace GTAVLife.Helper
             checkpoint.CylinderFarHeight = Distance.ToGameWorldDistance(1000);
 
             return checkpoint;
-        }
-
-        public static void RemoveBlip (Blip blip)
-        {
-            blip.Delete();
-        }
-
-        public static void RemoveCheckpoint (Checkpoint checkpoint)
-        {
-            checkpoint.Delete();
-        }
-
-        public static void CleanUpMission ()
-        {
-            foreach (Checkpoint ckpt in World.GetAllCheckpoints())
-            {
-                ckpt.Delete();
-            }
-
-            foreach (Blip b in World.GetAllBlips())
-            {
-                b.Delete();
-            }
         }
     }
 }

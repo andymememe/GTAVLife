@@ -62,30 +62,5 @@ namespace GTAVLife.Helper
 
             return vehicle;
         }
-
-        public static VehicleInfo ExportVehicleInfo(Vehicle vehicle, ref VehicleInfo vehicleInfo)
-        {
-            if (vehicleInfo == null)
-            {
-                vehicleInfo = new VehicleInfo("", "");
-            }
-
-            if (vehicle.Exists())
-            {
-                vehicleInfo.Hash = vehicle.Model.Hash;
-                vehicleInfo.Name = vehicle.DisplayName;
-                vehicleInfo.WheelType = (int)vehicle.Mods.WheelType;
-                vehicleInfo.Plate = vehicle.Mods.LicensePlate;
-                vehicleInfo.LicensePlateStyle = (int)vehicle.Mods.LicensePlateStyle;
-                vehicleInfo.PrimaryColor = (int)vehicle.Mods.PrimaryColor;
-                vehicleInfo.SecondaryColor = (int)vehicle.Mods.SecondaryColor;
-                vehicleInfo.PearlescentColor = (int)vehicle.Mods.PearlescentColor;
-                vehicleInfo.RimColor = (int)vehicle.Mods.RimColor;
-                vehicleInfo.TrimColor = (int)vehicle.Mods.TrimColor;
-                vehicleInfo.WindowTint = (int)vehicle.Mods.WindowTint;
-            }
-
-            return vehicleInfo;
-        }
     }
 }

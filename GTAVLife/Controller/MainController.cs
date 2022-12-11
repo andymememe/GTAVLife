@@ -7,13 +7,7 @@ namespace GTAVLife.Controller
     {
         private MainView mainView;
 
-        public IView View
-        {
-            get
-            {
-                return mainView;
-            }
-        }
+        public IView View => mainView;
 
         public void Show()
         {

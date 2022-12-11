@@ -21,35 +21,9 @@ namespace GTAVLife.GameData
         public int TrimColor { get; set; }
         public int WindowTint { get; set; }
 
-        public Vehicle ModVehicle(Vehicle vehicle)
-        {
-            vehicle.Mods.WheelType = (VehicleWheelType) WheelType;
-            vehicle.Mods.LicensePlate = Plate;
-            vehicle.Mods.LicensePlateStyle = (LicensePlateStyle) LicensePlateStyle;
-            vehicle.Mods.PrimaryColor = (VehicleColor) PrimaryColor;
-            vehicle.Mods.SecondaryColor = (VehicleColor) SecondaryColor;
-            vehicle.Mods.PearlescentColor = (VehicleColor) PearlescentColor;
-            vehicle.Mods.RimColor = (VehicleColor) RimColor;
-            vehicle.Mods.TrimColor = (VehicleColor) TrimColor;
-            vehicle.Mods.WindowTint = (VehicleWindowTint) WindowTint;
-
-            return vehicle;
-        }
-
-        public VehicleInfo(Vehicle vehicle, string nickname)
+        public VehicleInfo(string nickname)
         {
             NickName = nickname;
-            Hash = vehicle.Model.Hash;
-            Name = vehicle.DisplayName;
-            WheelType = (int)vehicle.Mods.WheelType;
-            Plate = vehicle.Mods.LicensePlate;
-            LicensePlateStyle = (int)vehicle.Mods.LicensePlateStyle;
-            PrimaryColor = (int)vehicle.Mods.PrimaryColor;
-            SecondaryColor = (int)vehicle.Mods.SecondaryColor;
-            PearlescentColor = (int)vehicle.Mods.PearlescentColor;
-            RimColor = (int)vehicle.Mods.RimColor;
-            TrimColor = (int)vehicle.Mods.TrimColor;
-            WindowTint = (int)vehicle.Mods.WindowTint;
         }
     }
 }

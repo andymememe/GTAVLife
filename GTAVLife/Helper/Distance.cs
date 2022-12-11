@@ -1,3 +1,6 @@
+using GTA;
+using GTA.Math;
+
 namespace GTAVLife.Helper
 {
     public class Distance
@@ -12,6 +15,11 @@ namespace GTAVLife.Helper
         public static float ToGameWorldDistance(float mm)
         {
             return mm / MM_PER_GAME_WORLD_DISTANCE;
+        }
+
+        public static bool IsInRange(Vector3 objA, Vector3 objB, float radiumMM)
+        {
+            return World.GetDistance(objA, objB) <= ToGameWorldDistance(radiumMM);
         }
     }
 }

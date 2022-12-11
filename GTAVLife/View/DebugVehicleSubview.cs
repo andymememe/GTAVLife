@@ -56,40 +56,40 @@ namespace GTAVLife.View
 
         private string getResult(string tag)
         {
-            if (PlayerInfo.Vehicle != null)
+            if (PlayerInfo.CurrentVehicle != null)
             {
                 switch (tag)
                 {
                     case "Name":
-                        return PlayerInfo.Vehicle.DisplayName;
+                        return PlayerInfo.CurrentVehicle.DisplayName;
                     case "NameLocalized":
-                        return PlayerInfo.Vehicle.LocalizedName;
+                        return PlayerInfo.CurrentVehicle.LocalizedName;
                     case "Class":
-                        return PlayerInfo.Vehicle.ClassDisplayName;
+                        return PlayerInfo.CurrentVehicle.ClassDisplayName;
                     case "ClassLocalized":
-                        return PlayerInfo.Vehicle.ClassLocalizedName;
+                        return PlayerInfo.CurrentVehicle.ClassLocalizedName;
                     case "Health":
-                        return PlayerInfo.Vehicle.Health.ToString();
+                        return PlayerInfo.CurrentVehicle.Health.ToString();
                     case "MaxHealth":
-                        return PlayerInfo.Vehicle.MaxHealth.ToString();
+                        return PlayerInfo.CurrentVehicle.MaxHealth.ToString();
                     case "EngineHealth":
-                        return PlayerInfo.Vehicle.EngineHealth.ToString();
+                        return PlayerInfo.CurrentVehicle.EngineHealth.ToString();
                     case "FuelLevel":
-                        return PlayerInfo.Vehicle.FuelLevel.ToString();
+                        return PlayerInfo.CurrentVehicle.FuelLevel.ToString();
                     case "OilLevel":
-                        return PlayerInfo.Vehicle.OilLevel.ToString();
+                        return PlayerInfo.CurrentVehicle.OilLevel.ToString();
                     case "OilVolume":
-                        return PlayerInfo.Vehicle.OilVolume.ToString();
+                        return PlayerInfo.CurrentVehicle.OilVolume.ToString();
                     case "PetrolTankVolume":
-                        return PlayerInfo.Vehicle.HandlingData.PetrolTankVolume.ToString();
+                        return PlayerInfo.CurrentVehicle.HandlingData.PetrolTankVolume.ToString();
                     case "Speed":
-                        return Math.Round((PlayerInfo.Vehicle.Speed * 3.6)).ToString();
+                        return Math.Round((PlayerInfo.CurrentVehicle.Speed * 3.6)).ToString();
                     case "Doors":
-                        return PlayerInfo.Vehicle.Doors.ToArray().Length.ToString();
+                        return PlayerInfo.CurrentVehicle.Doors.ToArray().Length.ToString();
                     case "PassengerCapacity":
-                        return PlayerInfo.Vehicle.PassengerCapacity.ToString();
+                        return PlayerInfo.CurrentVehicle.PassengerCapacity.ToString();
                     case "PassengerCount":
-                        return PlayerInfo.Vehicle.PassengerCount.ToString();
+                        return PlayerInfo.CurrentVehicle.PassengerCount.ToString();
                     default:
                         return "";
                 }

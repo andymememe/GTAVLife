@@ -43,7 +43,7 @@ namespace GTAVLife.GameData
             }
         }
 
-        public static GTA.Vehicle Vehicle
+        public static GTA.Vehicle CurrentVehicle
         {
             get
             {

@@ -18,20 +18,6 @@ namespace GTAVLife.GameData
             }
         }
 
-        [JsonIgnore]
-        public bool IsActivate {
-            get
-            {
-                return isActivate;
-            }
-
-            set
-            {
-                isActivate = value;
-                isDirty = true;
-            }
-        }
-
         public bool HasTAPCard
         {
             get
@@ -60,38 +46,37 @@ namespace GTAVLife.GameData
             }
         }
 
-        [JsonProperty("OwnedVehicles")]
-        private List<VehicleInfo> OwnedVehicles
-        {
+        public List<VehicleInfo> OwnedVehicles { get; set; }
+
+        [JsonIgnore]
+        public bool IsActivate {
             get
             {
-                return ownedVehicles;
+                return isActivate;
             }
+
             set
             {
-                ownedVehicles = value;
+                isActivate = value;
+                isDirty = true;
             }
         }
 
         [JsonIgnore]
-        public bool IsDirty
-        {
-            get
-            {
-                return isDirty;
-            }
-        }
+        public bool IsDirty => isDirty;
+
+        [JsonIgnore]
+        public int CurrentEntryPointIndex { get; set; }
 
         private static Life instance;
         private bool hasTAPCard;
         private bool hasTrainTicket;
-        private List<VehicleInfo> ownedVehicles;
         private bool isDirty;
         private bool isActivate;
 
         public void AddOwnedCar(VehicleInfo vehicle)
         {
-            ownedVehicles.Add(vehicle);
+            this.OwnedVehicles.Add(vehicle);
             this.isDirty = true;
         }
 
@@ -109,6 +94,11 @@ namespace GTAVLife.GameData
             this.isDirty = false;
         }
 
+        public void ForceDirty()
+        {
+            this.isDirty = true;
+        }
+
         private Life()
         {
             this.isActivate = false;
@@ -116,6 +106,9 @@ namespace GTAVLife.GameData
             this.hasTAPCard = false;
             this.hasTrainTicket = false;
             this.isDirty = true;
+
+            this.OwnedVehicles = new List<VehicleInfo>();
+            this.CurrentEntryPointIndex = -1;
             
             instance = this;
         }

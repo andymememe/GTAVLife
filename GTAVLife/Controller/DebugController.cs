@@ -1,4 +1,5 @@
 using System.Drawing;
+using GTA.UI;
 using GTAVLife.GameData;
 using GTAVLife.Helper;
 using GTAVLife.View;
@@ -44,6 +45,16 @@ namespace GTAVLife.Controller
             if (PlayerInfo.Player.IsAiming)
             {
                 Drawer.DrawMarkerOnAimingTarget();
+            }
+
+            if (EntryPointList.Instance.GetPointType(Life.Instance.CurrentEntryPointIndex) == PointType.TestPlayer)
+            {
+                Screen.ShowHelpText("Step On Test Player");
+            }
+
+            if (EntryPointList.Instance.GetPointType(Life.Instance.CurrentEntryPointIndex) == PointType.TestVehicle)
+            {
+                Screen.ShowHelpText("Step On Test Vehicle");
             }
             
             debugView.Process();

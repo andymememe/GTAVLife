@@ -49,7 +49,7 @@ namespace GTAVLife
                 EntryPointController.Instance,
                 InventoryController.Instance,
                 CarShopController.Instance,
-                CarSpawnerController.Instance,
+                GarageController.Instance,
             };
 
             foreach (IController controller in controllers)

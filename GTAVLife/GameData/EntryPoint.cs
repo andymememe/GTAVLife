@@ -58,27 +58,33 @@ namespace GTAVLife.GameData
     }
 
     public class EntryPointList : SimpleSingletonBase<EntryPointList>
-    {   public List<EntryPoint> EntryPoints { get; }
+    {   
+        private List<EntryPoint> entryPoints;
+
+        public List<EntryPoint>.Enumerator GetEnumerator()
+        {
+            return entryPoints.GetEnumerator();
+        }
 
         public void AddTestPlayerEntryPoint(Vector3 pos, Vector3 pointTo)
         {
             DateTime dt = DateTime.Now;
-            String name = string.Format("TestPlayer_{0}", dt.Ticks);
+            string name = string.Format("TestPlayer_{0}", dt.Ticks);
 
-            this.EntryPoints.Add(new EntryPoint(name, PointType.TestPlayer, EntryType.Player, pos, pointTo, Color.Red, BlipSprite.CaptureAmericanFlag));
+            this.entryPoints.Add(new EntryPoint(name, PointType.TestPlayer, EntryType.Player, pos, pointTo, Color.Red, BlipSprite.CaptureAmericanFlag));
         }
 
         public void AddTestVehicleEntryPoint(Vector3 pos, Vector3 pointTo)
         {
             DateTime dt = DateTime.Now;
-            String name = string.Format("TestVehicle_{0}", dt.Ticks);
+            string name = string.Format("TestVehicle_{0}", dt.Ticks);
             
-            this.EntryPoints.Add(new EntryPoint(name, PointType.TestVehicle, EntryType.Vehicle, pos, pointTo, Color.Blue, BlipSprite.CarShowroom));
+            this.entryPoints.Add(new EntryPoint(name, PointType.TestVehicle, EntryType.Vehicle, pos, pointTo, Color.Blue, BlipSprite.CarShowroom));
         }
 
         public void RemoveAllEntryPoint()
         {
-           foreach (EntryPoint entryPoint in this.EntryPoints.FindAll(
+           foreach (EntryPoint entryPoint in this.entryPoints.FindAll(
                 delegate(EntryPoint point)
                 {
                     return point.Status == EntryPointStatus.Enabled;
@@ -91,17 +97,27 @@ namespace GTAVLife.GameData
 
         public PointType GetPointType(int index)
         {
-            if (index >= 0 && index < this.EntryPoints.Count)
+            if (index >= 0 && index < this.entryPoints.Count)
             {
-                return this.EntryPoints[index].PointType;
+                return this.entryPoints[index].PointType;
             }
 
             return PointType.None;
         }
 
+        public string GetPointName(int index)
+        {
+            if (index >= 0 && index < this.entryPoints.Count)
+            {
+                return this.entryPoints[index].Name;
+            }
+
+            return null;
+        }
+
         private EntryPointList()
         {
-            this.EntryPoints = new List<EntryPoint>();
+            this.entryPoints = new List<EntryPoint>();
         }
     }
 }

@@ -3,7 +3,7 @@ using GTA.Math;
 
 namespace GTAVLife.Helper
 {
-    public class Distance
+    public class DistanceUtils
     {
         private const float MM_PER_GAME_WORLD_DISTANCE = 800f;
 

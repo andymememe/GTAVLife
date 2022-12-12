@@ -74,10 +74,20 @@ namespace GTAVLife.GameData
         private bool isDirty;
         private bool isActivate;
 
-        public void AddOwnedCar(VehicleInfo vehicle)
+        public bool AddOwnedVehicle(VehicleInfo vehicleInfo)
         {
-            this.OwnedVehicles.Add(vehicle);
-            this.isDirty = true;
+            if (this.OwnedVehicles.Find(info => info.NickName == vehicleInfo.NickName) != null)
+            {
+                return false;
+            }
+            
+            OwnedVehicles.Add(vehicleInfo);
+            return true;
+        }
+
+        public List<VehicleInfo>.Enumerator GetOwnedVehicleEnumerator()
+        {
+            return this.OwnedVehicles.GetEnumerator();
         }
 
         public string Serializer()

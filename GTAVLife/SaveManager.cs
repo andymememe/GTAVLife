@@ -6,9 +6,9 @@ namespace GTAVLife
     public class SaveManager
     {
         private static SaveManager instance = null;
-        private Save save;
+        private SaveHelper save;
 
-        public static SaveManager GetInstance(Save save)
+        public static SaveManager GetInstance(SaveHelper save)
         {
             return instance ?? new SaveManager(save);
         }
@@ -29,7 +29,7 @@ namespace GTAVLife
             }
         }
 
-        private SaveManager(Save save)
+        private SaveManager(SaveHelper save)
         {
             this.save = save;
         }

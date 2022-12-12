@@ -49,12 +49,12 @@ namespace GTAVLife.Controller
 
             if (EntryPointList.Instance.GetPointType(Life.Instance.CurrentEntryPointIndex) == PointType.TestPlayer)
             {
-                Screen.ShowHelpText("Step On Test Player");
+                Screen.ShowHelpText(string.Format("Step On {0}", EntryPointList.Instance.GetPointName(Life.Instance.CurrentEntryPointIndex)));
             }
 
             if (EntryPointList.Instance.GetPointType(Life.Instance.CurrentEntryPointIndex) == PointType.TestVehicle)
             {
-                Screen.ShowHelpText("Step On Test Vehicle");
+                Screen.ShowHelpText(string.Format("Park On {0}", EntryPointList.Instance.GetPointName(Life.Instance.CurrentEntryPointIndex)));
             }
             
             debugView.Process();

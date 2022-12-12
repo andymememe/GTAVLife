@@ -17,7 +17,7 @@ public class GTAVLifeScript : Script
     // Game Related
     private Router router;
     private Logger logger;
-    private Save save;
+    private SaveHelper save;
     private SaveManager saveManager;
 
     public GTAVLifeScript()
@@ -26,7 +26,7 @@ public class GTAVLifeScript : Script
         logger = Logger.GetInstance(Path.Combine(loggerPath), LogLevel.Debug);
 
         string[] savePath = new string[] { BaseDirectory, "GTAVLifeScript.json" };
-        save = Save.GetInstance(Path.Combine(savePath));
+        save = SaveHelper.GetInstance(Path.Combine(savePath));
         saveManager = SaveManager.GetInstance(save);
 
         router = Router.Instance;

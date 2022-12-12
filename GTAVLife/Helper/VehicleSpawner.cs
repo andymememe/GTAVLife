@@ -4,9 +4,9 @@ using GTAVLife.GameData;
 
 namespace GTAVLife.Helper
 {
-    public class Spawner
+    public class VehicleSpawner
     {
-        public static Vehicle SpawnVehicle(int hash, string license, float heading, bool temporary)
+        public static Vehicle SpawnVehicle(int hash, string license, float heading, bool isMissionUsed)
         {
             Vehicle vehicle = World.CreateVehicle(hash, PlayerInfo.Position, heading);
             if (vehicle.Exists())
@@ -14,7 +14,7 @@ namespace GTAVLife.Helper
                 vehicle.Mods.LicensePlate = license;
                 vehicle.PlaceOnNextStreet();
                 
-                if (temporary)
+                if (!isMissionUsed)
                 {
                     vehicle.MarkAsNoLongerNeeded();
                 }
@@ -22,7 +22,7 @@ namespace GTAVLife.Helper
             return vehicle;
         }
 
-        public static Vehicle SpawnVehicle(int hash, string license, Vector3 position, float heading, bool temporary)
+        public static Vehicle SpawnVehicle(int hash, string license, Vector3 position, float heading, bool isMissionUsed)
         {
             Vehicle vehicle = World.CreateVehicle(hash, position, heading);
             if (vehicle.Exists())
@@ -30,7 +30,7 @@ namespace GTAVLife.Helper
                 vehicle.Mods.LicensePlate = license;
                 vehicle.PlaceOnGround();
 
-                if (temporary)
+                if (!isMissionUsed)
                 {
                     vehicle.MarkAsNoLongerNeeded();
                 }
@@ -38,9 +38,9 @@ namespace GTAVLife.Helper
             return vehicle;
         }
 
-        public static Vehicle SpawnVehicle(VehicleInfo vehicleInfo, Vector3 position, float heading, bool temporary)
+        public static Vehicle SpawnVehicle(VehicleInfo vehicleInfo, bool isMissionUsed)
         {
-            Vehicle vehicle = World.CreateVehicle(vehicleInfo.Hash, position, heading);
+            Vehicle vehicle = World.CreateVehicle(vehicleInfo.Hash, vehicleInfo.SpawnPosition, vehicleInfo.SpawnHeading);
 
             if (vehicle.Exists())
             {
@@ -54,7 +54,7 @@ namespace GTAVLife.Helper
                 vehicle.Mods.TrimColor = (VehicleColor) vehicleInfo.TrimColor;
                 vehicle.Mods.WindowTint = (VehicleWindowTint) vehicleInfo.WindowTint;
 
-                if (temporary)
+                if (!isMissionUsed)
                 {
                     vehicle.MarkAsNoLongerNeeded();
                 }

@@ -2,14 +2,14 @@ using System.IO;
 
 namespace GTAVLife.Helper
 {
-    public class Save
+    public class SaveHelper
     {
-        private static Save instance = null;
+        private static SaveHelper instance = null;
         private string path;
 
-        public static Save GetInstance(string path)
+        public static SaveHelper GetInstance(string path)
         {
-            return instance ?? new Save(path);
+            return instance ?? new SaveHelper(path);
         }
 
         public string Path => path;
@@ -29,7 +29,7 @@ namespace GTAVLife.Helper
             return File.ReadAllText(this.path);
         }
 
-        private Save(string path)
+        private SaveHelper(string path)
         {
             this.path = path;
             instance = this;

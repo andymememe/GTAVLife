@@ -19,18 +19,18 @@ namespace GTAVLife.Helper
 
         public static Checkpoint SetPlayerCheckpoint (Vector3 position, Vector3 pointTo, Color color)
         {
-            Checkpoint checkpoint = World.CreateCheckpoint(CheckpointIcon.Cyclinder2, position, pointTo, Distance.ToGameWorldDistance(500), color);
-            checkpoint.CylinderNearHeight = Distance.ToGameWorldDistance(500);
-            checkpoint.CylinderFarHeight = Distance.ToGameWorldDistance(500);
+            Checkpoint checkpoint = World.CreateCheckpoint(CheckpointIcon.Cyclinder2, position, pointTo, DistanceUtils.ToGameWorldDistance(500), color);
+            checkpoint.CylinderNearHeight = DistanceUtils.ToGameWorldDistance(500);
+            checkpoint.CylinderFarHeight = DistanceUtils.ToGameWorldDistance(500);
 
             return checkpoint;
         }
 
         public static Checkpoint SetVehicleCheckpoint (Vector3 position, Vector3 pointTo, Color color)
         {
-            Checkpoint checkpoint = World.CreateCheckpoint(CheckpointIcon.Cyclinder2, position, pointTo, Distance.ToGameWorldDistance(3000), color);
-            checkpoint.CylinderNearHeight = Distance.ToGameWorldDistance(1000);
-            checkpoint.CylinderFarHeight = Distance.ToGameWorldDistance(1000);
+            Checkpoint checkpoint = World.CreateCheckpoint(CheckpointIcon.Cyclinder2, position, pointTo, DistanceUtils.ToGameWorldDistance(3000), color);
+            checkpoint.CylinderNearHeight = DistanceUtils.ToGameWorldDistance(1000);
+            checkpoint.CylinderFarHeight = DistanceUtils.ToGameWorldDistance(1000);
 
             return checkpoint;
         }

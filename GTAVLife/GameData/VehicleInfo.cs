@@ -103,6 +103,18 @@ namespace GTAVLife.GameData
             return this.vehicle.Exists();
         }
 
+        public void ChangePlate(string plate, GTA.LicensePlateStyle style)
+        {
+            if (!IsVehicleDeleted())
+            {
+                this.vehicle.Mods.LicensePlate = plate;
+                this.vehicle.Mods.LicensePlateStyle = style;
+            }
+
+            this.Plate = plate;
+            this.LicensePlateStyle = (int)style;
+        }
+
         private void setDefaultMod()
         {
             this.Plate = null;

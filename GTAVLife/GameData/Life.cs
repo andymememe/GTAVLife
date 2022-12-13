@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Newtonsoft.Json;
+using GTA;
 
 namespace GTAVLife.GameData
 {
@@ -89,6 +90,34 @@ namespace GTAVLife.GameData
 
             ownedVehicles.Add(vehicleInfo);
             return true;
+        }
+
+        public bool ChangePlate(int index, string plate)
+        {
+            if (index < this.ownedVehicles.Count)
+            {
+                if (this.ownedVehicles.Find(info => info.Plate == plate) != null)
+                {
+                    return false;
+                }
+
+                LicensePlateStyle style = (LicensePlateStyle) this.ownedVehicles[index].LicensePlateStyle;
+                this.ownedVehicles[index].ChangePlate(plate, style);
+                return true;
+            }
+
+            return false;
+        }
+
+        public bool ChangePlateStyle(int index, LicensePlateStyle style)
+        {
+            if (index < this.ownedVehicles.Count)
+            {
+                this.ownedVehicles[index].ChangePlate(this.ownedVehicles[index].Plate, style);
+                return true;
+            }
+
+            return false;
         }
 
         public string Serializer()

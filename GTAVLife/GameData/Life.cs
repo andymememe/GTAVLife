@@ -20,17 +20,17 @@ namespace GTAVLife.GameData
             }
         }
 
-        public bool HasTAPCard
+        public int FAPCard
         {
             get
             {
-                return hasTAPCard;
+                return fapCard;
             }
 
             set
             {
                 isDirty = true;
-                hasTAPCard = value;
+                fapCard = value;
             }
         }
 
@@ -76,7 +76,7 @@ namespace GTAVLife.GameData
         private List<VehicleInfo> ownedVehicles;
 
         private static Life instance;
-        private bool hasTAPCard;
+        private int fapCard;
         private bool hasTrainTicket;
         private bool isDirty;
         private bool isActivate;
@@ -143,7 +143,7 @@ namespace GTAVLife.GameData
         {
             this.isActivate = false;
 
-            this.hasTAPCard = false;
+            this.fapCard = -1;
             this.hasTrainTicket = false;
             this.isDirty = true;
 

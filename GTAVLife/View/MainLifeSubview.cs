@@ -48,7 +48,7 @@ namespace GTAVLife.View
                 case "TrainTicket":
                     return Life.Instance.HasTrainTicket.ToString();
                 case "TAPCard":
-                    return Life.Instance.HasTAPCard.ToString();
+                    return Life.Instance.FAPCard.ToString();
                 default:
                     return "";
             }

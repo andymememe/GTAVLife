@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GTA;
+using GTA.UI;
 using GTA.Math;
 using GTAVLife.GameData;
 using GTAVLife.Helper;
@@ -40,12 +41,15 @@ namespace GTAVLife.View
             {
                 case "SpawnVehicle":
                     nickname = Game.GetUserInput(WindowTitle.EnterMessage20, "", 20);
-                    Vector3 spawnPosition = PlayerInfo.Character.BelowPosition + (Vector3.WorldEast * DistanceUtils.ToMM(2000));
-                    VehicleInfo vehicleInfo = new VehicleInfo(nickname, (int) VehicleHash.Sentinel, spawnPosition, PlayerInfo.Character.Heading);
-                    while (!Life.Instance.AddOwnedVehicle(vehicleInfo))
+                    Vector3 spawnPosition = PlayerInfo.Character.Position + (Vector3.RelativeLeft * DistanceUtils.ToGameWorldDistance(2000));
+                    VehicleInfo vehicleInfo = new VehicleInfo(nickname, VehicleHash.Sentinel, spawnPosition, PlayerInfo.Character.Heading);
+                    if (Life.Instance.AddOwnedVehicle(vehicleInfo))
                     {
-                        nickname = Game.GetUserInput(WindowTitle.InvalidMessage, "", 20);
-                        vehicleInfo.NickName = nickname;
+                        Blip blip = IndicatorHelper.SetBlip(spawnPosition, BlipSprite.TargetA, vehicleInfo.NickName);
+                    }
+                    else
+                    {
+                        Screen.ShowSubtitle("The nickname is used by other vehicle");
                     }
                     break;
                 default:

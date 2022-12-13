@@ -4,7 +4,7 @@ using GTA.Math;
 
 namespace GTAVLife.Helper
 {
-    public class EntryPointHelper
+    public class IndicatorHelper
     {
         public static Blip SetBlip (Vector3 position, BlipSprite sprite, string name)
         {

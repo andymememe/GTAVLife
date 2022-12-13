@@ -6,9 +6,9 @@ namespace GTAVLife.Helper
 {
     public class VehicleSpawner
     {
-        public static Vehicle SpawnVehicle(int hash, string license, float heading, bool isMissionUsed)
+        public static Vehicle SpawnVehicle(VehicleHash hash, string license, bool isMissionUsed)
         {
-            Vehicle vehicle = World.CreateVehicle(hash, PlayerInfo.Position, heading);
+            Vehicle vehicle = World.CreateVehicle(new Model(hash), PlayerInfo.Position + (Vector3.RelativeLeft * DistanceUtils.ToGameWorldDistance(2000)), PlayerInfo.Character.Heading);
             if (vehicle.Exists())
             {
                 vehicle.Mods.LicensePlate = license;
@@ -22,9 +22,9 @@ namespace GTAVLife.Helper
             return vehicle;
         }
 
-        public static Vehicle SpawnVehicle(int hash, string license, Vector3 position, float heading, bool isMissionUsed)
+        public static Vehicle SpawnVehicle(VehicleHash hash, string license, Vector3 position, float heading, bool isMissionUsed)
         {
-            Vehicle vehicle = World.CreateVehicle(hash, position, heading);
+            Vehicle vehicle = World.CreateVehicle(new Model(hash), position, heading);
             if (vehicle.Exists())
             {
                 vehicle.Mods.LicensePlate = license;
@@ -40,18 +40,16 @@ namespace GTAVLife.Helper
 
         public static Vehicle SpawnVehicle(VehicleInfo vehicleInfo, bool isMissionUsed)
         {
-            Vehicle vehicle = World.CreateVehicle(vehicleInfo.Hash, vehicleInfo.SpawnPosition, vehicleInfo.SpawnHeading);
+            Vehicle vehicle = World.CreateVehicle(new Model((VehicleHash) vehicleInfo.Hash), vehicleInfo.SpawnPosition, vehicleInfo.SpawnHeading);
 
             if (vehicle.Exists())
             {
-                vehicle.Mods.WheelType = (VehicleWheelType) vehicleInfo.WheelType;
                 vehicle.Mods.LicensePlate = vehicleInfo.Plate;
                 vehicle.Mods.LicensePlateStyle = (LicensePlateStyle) vehicleInfo.LicensePlateStyle;
                 vehicle.Mods.PrimaryColor = (VehicleColor) vehicleInfo.PrimaryColor;
                 vehicle.Mods.SecondaryColor = (VehicleColor) vehicleInfo.SecondaryColor;
                 vehicle.Mods.PearlescentColor = (VehicleColor) vehicleInfo.PearlescentColor;
                 vehicle.Mods.RimColor = (VehicleColor) vehicleInfo.RimColor;
-                vehicle.Mods.TrimColor = (VehicleColor) vehicleInfo.TrimColor;
                 vehicle.Mods.WindowTint = (VehicleWindowTint) vehicleInfo.WindowTint;
 
                 if (!isMissionUsed)

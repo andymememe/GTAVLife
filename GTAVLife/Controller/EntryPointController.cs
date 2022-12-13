@@ -12,14 +12,12 @@ namespace GTAVLife.Controller
         public void Process()
         {
             Life.Instance.CurrentEntryPointIndex = -1;
-
-            int index = 0;
             EntryPoint entryPoint;
-            List<EntryPoint>.Enumerator enumerator = EntryPointList.Instance.GetEnumerator();
+            int index = 0;
 
-            while (enumerator.MoveNext())
+            for (int i = 0; i < EntryPointList.Instance.EntryPoints.Count; i++)
             {
-                entryPoint = EntryPointList.Instance.GetEnumerator().Current;
+                entryPoint = EntryPointList.Instance.EntryPoints[i];
                 switch (entryPoint.Status)
                 {
                     case EntryPointStatus.Add:
@@ -61,15 +59,13 @@ namespace GTAVLife.Controller
 
                 index++;
             }
-
-            enumerator.Dispose();
         }
 
         private void setupIndicator(ref EntryPoint entryPoint)
         {
             if (entryPoint.EntryType == EntryType.Vehicle || entryPoint.EntryType == EntryType.TowedVehicle)
             {
-                entryPoint.Checkpoint = EntryPointHelper.SetVehicleCheckpoint(
+                entryPoint.Checkpoint = IndicatorHelper.SetVehicleCheckpoint(
                     entryPoint.Position,
                     entryPoint.PointTo,
                     entryPoint.Color
@@ -77,14 +73,14 @@ namespace GTAVLife.Controller
             }
             else
             {
-                entryPoint.Checkpoint = EntryPointHelper.SetPlayerCheckpoint(
+                entryPoint.Checkpoint = IndicatorHelper.SetPlayerCheckpoint(
                     entryPoint.Position,
                     entryPoint.PointTo,
                     entryPoint.Color
                 );
             }
 
-            entryPoint.Blip = EntryPointHelper.SetBlip(
+            entryPoint.Blip = IndicatorHelper.SetBlip(
                 entryPoint.Position,
                 entryPoint.BlipSpirte,
                 entryPoint.Name

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using GTA;
+using GTA.UI;
 using GTAVLife.Helper;
 using GTAVLife.View;
 using GTAVLife.GameData;
@@ -12,17 +13,16 @@ namespace GTAVLife.Controller
 
         public void Process()
         {
-            List<VehicleInfo>.Enumerator enumerator = Life.Instance.GetOwnedVehicleEnumerator();
             VehicleInfo vehicleInfo;
             Vehicle vehicle;
-            while (enumerator.MoveNext())
+            for (int i = 0; i < Life.Instance.OwnedVehicles.Count; i++)
             {
-                vehicleInfo = enumerator.Current;
+                vehicleInfo = Life.Instance.OwnedVehicles[i];
                 if (vehicleInfo.NeedSpawn)
                 {
+                    vehicleInfo.NeedSpawn = false;
                     vehicle = VehicleSpawner.SpawnVehicle(vehicleInfo, false);
                     vehicleInfo.ImportVehicleInfo(ref vehicle);
-                    vehicleInfo.NeedSpawn = false;
                     vehicleInfo.Location = VehicleInfo.OUTSIDE;
                 }
                 else
@@ -33,12 +33,11 @@ namespace GTAVLife.Controller
                     }
                 }
             }
-            enumerator.Dispose();
         }
 
         public void Show()
         {
-            
+
         }
     }
 }

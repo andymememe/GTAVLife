@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Drawing;
 using GTA;
 using GTA.Math;
@@ -59,12 +60,9 @@ namespace GTAVLife.GameData
 
     public class EntryPointList : SimpleSingletonBase<EntryPointList>
     {   
-        private List<EntryPoint> entryPoints;
+        public ReadOnlyCollection<EntryPoint> EntryPoints => entryPoints.AsReadOnly();
 
-        public List<EntryPoint>.Enumerator GetEnumerator()
-        {
-            return entryPoints.GetEnumerator();
-        }
+        private List<EntryPoint> entryPoints;
 
         public void AddTestPlayerEntryPoint(Vector3 pos, Vector3 pointTo)
         {

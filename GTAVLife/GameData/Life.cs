@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using Newtonsoft.Json;
 
 namespace GTAVLife.GameData
@@ -46,10 +47,9 @@ namespace GTAVLife.GameData
             }
         }
 
-        public List<VehicleInfo> OwnedVehicles { get; set; }
-
         [JsonIgnore]
-        public bool IsActivate {
+        public bool IsActivate
+        {
             get
             {
                 return isActivate;
@@ -68,6 +68,12 @@ namespace GTAVLife.GameData
         [JsonIgnore]
         public int CurrentEntryPointIndex { get; set; }
 
+        [JsonIgnore]
+        public ReadOnlyCollection<VehicleInfo> OwnedVehicles => ownedVehicles.AsReadOnly();
+
+        [JsonProperty("OwnedVehicles")]
+        private List<VehicleInfo> ownedVehicles;
+
         private static Life instance;
         private bool hasTAPCard;
         private bool hasTrainTicket;
@@ -76,18 +82,13 @@ namespace GTAVLife.GameData
 
         public bool AddOwnedVehicle(VehicleInfo vehicleInfo)
         {
-            if (this.OwnedVehicles.Find(info => info.NickName == vehicleInfo.NickName) != null)
+            if (this.ownedVehicles.Find(info => info.NickName == vehicleInfo.NickName) != null)
             {
                 return false;
             }
-            
-            OwnedVehicles.Add(vehicleInfo);
-            return true;
-        }
 
-        public List<VehicleInfo>.Enumerator GetOwnedVehicleEnumerator()
-        {
-            return this.OwnedVehicles.GetEnumerator();
+            ownedVehicles.Add(vehicleInfo);
+            return true;
         }
 
         public string Serializer()
@@ -117,9 +118,9 @@ namespace GTAVLife.GameData
             this.hasTrainTicket = false;
             this.isDirty = true;
 
-            this.OwnedVehicles = new List<VehicleInfo>();
+            this.ownedVehicles = new List<VehicleInfo>();
             this.CurrentEntryPointIndex = -1;
-            
+
             instance = this;
         }
     }

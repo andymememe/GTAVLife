@@ -17,7 +17,7 @@ namespace GTAVLife.View
         private Dictionary<string, string> items = new Dictionary<string, string>
         {
             {"TrainTicket", "Train Ticket"},
-            {"TAPCard", "TAP Card"},
+            {"FAPCard", "FAP Card"},
         };
 
         public void Process()
@@ -47,7 +47,7 @@ namespace GTAVLife.View
             {
                 case "TrainTicket":
                     return Life.Instance.HasTrainTicket.ToString();
-                case "TAPCard":
+                case "FAPCard":
                     return Life.Instance.FAPCard.ToString();
                 default:
                     return "";

@@ -105,6 +105,7 @@ namespace GTAVLife.GameData
 
         private void setDefaultMod()
         {
+            this.Plate = null;
             this.LicensePlateStyle = (int)GTA.LicensePlateStyle.BlueOnWhite1;
             this.WheelType = -1;
             this.FrontWheel = -1;

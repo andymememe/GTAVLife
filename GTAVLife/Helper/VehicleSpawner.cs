@@ -1,3 +1,4 @@
+using System;
 using GTA;
 using GTA.Math;
 using GTAVLife.GameData;
@@ -44,13 +45,32 @@ namespace GTAVLife.Helper
 
             if (vehicle.Exists())
             {
-                vehicle.Mods.LicensePlate = vehicleInfo.Plate;
+                if (vehicleInfo.Plate != null)
+                {
+                    vehicle.Mods.LicensePlate = vehicleInfo.Plate;
+                }
+                
                 vehicle.Mods.LicensePlateStyle = (LicensePlateStyle) vehicleInfo.LicensePlateStyle;
                 vehicle.Mods.PrimaryColor = (VehicleColor) vehicleInfo.PrimaryColor;
                 vehicle.Mods.SecondaryColor = (VehicleColor) vehicleInfo.SecondaryColor;
                 vehicle.Mods.PearlescentColor = (VehicleColor) vehicleInfo.PearlescentColor;
                 vehicle.Mods.RimColor = (VehicleColor) vehicleInfo.RimColor;
                 vehicle.Mods.WindowTint = (VehicleWindowTint) vehicleInfo.WindowTint;
+                
+                if (vehicleInfo.WheelType >= 0 && Array.IndexOf(vehicle.Mods.AllowedWheelTypes, (VehicleWheelType)vehicleInfo.WheelType) >= 0)
+                {
+                    vehicle.Mods.WheelType = (VehicleWheelType)vehicleInfo.WheelType;
+                }
+
+                if (vehicleInfo.FrontWheel >= 0)
+                {
+                    vehicle.Mods[VehicleModType.FrontWheel].Index = vehicleInfo.FrontWheel;
+                }
+
+                if (vehicleInfo.RearWheel >= 0)
+                {
+                    vehicle.Mods[VehicleModType.RearWheel].Index = vehicleInfo.RearWheel;
+                }
 
                 if (!isMissionUsed)
                 {

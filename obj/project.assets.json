@@ -118,11 +118,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "g:\\CSharp\\GTAVLife\\GTAVLife.csproj",
+      "projectUniqueName": "G:\\CSharp\\GTAVLife\\GTAVLife.csproj",
       "projectName": "GTAVLife",
-      "projectPath": "g:\\CSharp\\GTAVLife\\GTAVLife.csproj",
+      "projectPath": "G:\\CSharp\\GTAVLife\\GTAVLife.csproj",
       "packagesPath": "C:\\Users\\chena\\.nuget\\packages\\",
-      "outputPath": "g:\\CSharp\\GTAVLife\\obj\\",
+      "outputPath": "G:\\CSharp\\GTAVLife\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chena\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -162,7 +162,7 @@
             "version": "[3.5.1, )"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.101\\RuntimeIdentifierGraph.json"
       }
     }
   }

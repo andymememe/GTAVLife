@@ -29,6 +29,9 @@ public class GTAVLifeScript : Script
         save = SaveHelper.GetInstance(Path.Combine(savePath));
         saveManager = SaveManager.GetInstance(save);
 
+        string[] charsPath = new string[] { BaseDirectory, "chars.json" };
+        MPFreemodeModels.Instance.LoadModels(Path.Combine(charsPath));
+
         router = Router.Instance;
         objectPool = new ObjectPool();
 

@@ -32,6 +32,7 @@ namespace GTAVLife.View
             {"NearestVehicleLocalized", "N. Vehicle"},
             {"IsPlayerControlable", "Controlable"},
             {"IsPlayerInVehicle", "In Vehicle"},
+            {"IsPlayerInTram", "In Tram"},
         };
 
         public NativeMenu Menu => menu;
@@ -121,6 +122,8 @@ namespace GTAVLife.View
                     return PlayerInfo.Player.CanControlCharacter.ToString();
                 case "IsPlayerInVehicle":
                     return PlayerInfo.Character.IsInVehicle().ToString();
+                case "IsPlayerInTram":
+                    return PlayerInfo.Character.IsInTrain.ToString();
                 case "IsNearestPedHuman":
                     if (PlayerInfo.NearestPed == null)
                     {

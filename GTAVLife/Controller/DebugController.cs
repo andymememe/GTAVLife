@@ -8,19 +8,11 @@ namespace GTAVLife.Controller
 {
     public class DebugController : SimpleSingletonBase<DebugController>, IController
     {
-        private DebugView debugView;
-
-        public IView View
-        {
-            get
-            {
-                return debugView;
-            }
-        }
+        public IView View => DebugView.Instance;
 
         public void Show()
         {
-            debugView.Show();
+            View.Show();
         }
 
         public void Process()
@@ -57,12 +49,7 @@ namespace GTAVLife.Controller
                 Screen.ShowHelpText(string.Format("Park On {0}", EntryPointList.Instance.GetPointName(Life.Instance.CurrentEntryPointIndex)));
             }
             
-            debugView.Process();
-        }
-
-        private DebugController()
-        {
-            debugView = DebugView.Instance;
+            View.Process();
         }
     }
 }

@@ -2,7 +2,7 @@ using GTA;
 
 namespace GTAVLife.GameData
 {
-    public class Enviroment
+    public class GameStatus
     {
         public static bool IsMissionActive
         {

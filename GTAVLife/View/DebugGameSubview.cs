@@ -49,13 +49,13 @@ namespace GTAVLife.View
             switch (tag)
             {
                 case "IsMissionActive":
-                    return Enviroment.IsMissionActive.ToString();
+                    return GameStatus.IsMissionActive.ToString();
                 case "IsRandomEventActive":
-                    return Enviroment.IsRandomEventActive.ToString();
+                    return GameStatus.IsRandomEventActive.ToString();
                 case "IsCutsceneActive":
-                    return Enviroment.IsCutsceneActive.ToString();
+                    return GameStatus.IsCutsceneActive.ToString();
                 case "IsLoading":
-                    return Enviroment.IsLoading.ToString();
+                    return GameStatus.IsLoading.ToString();
                 default:
                     return "";
             }

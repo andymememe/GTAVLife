@@ -20,6 +20,20 @@ namespace GTAVLife.GameData
             }
         }
 
+        public string Name
+        {
+            get
+            {
+                return name;
+            }
+
+            set
+            {
+                isDirty = true;
+                name = value;
+            }
+        }
+
         public int FAPCard
         {
             get
@@ -49,21 +63,6 @@ namespace GTAVLife.GameData
         }
 
         [JsonIgnore]
-        public bool IsActivate
-        {
-            get
-            {
-                return isActivate;
-            }
-
-            set
-            {
-                isActivate = value;
-                isDirty = true;
-            }
-        }
-
-        [JsonIgnore]
         public bool IsDirty => isDirty;
 
         [JsonIgnore]
@@ -76,10 +75,10 @@ namespace GTAVLife.GameData
         private List<VehicleInfo> ownedVehicles;
 
         private static Life instance;
+        private string name;
         private int fapCard;
         private bool hasTrainTicket;
         private bool isDirty;
-        private bool isActivate;
 
         public bool AddOwnedVehicle(VehicleInfo vehicleInfo)
         {
@@ -122,7 +121,7 @@ namespace GTAVLife.GameData
 
         public string Serializer()
         {
-            string result = JsonConvert.SerializeObject(this, Formatting.Indented);
+            string result = JsonConvert.SerializeObject(instance, Formatting.Indented);
             this.isDirty = false;
 
             return result;
@@ -131,7 +130,7 @@ namespace GTAVLife.GameData
         public void Deserializer(string content)
         {
             instance = JsonConvert.DeserializeObject<Life>(content);
-            this.isDirty = false;
+            this.isDirty = true;
         }
 
         public void ForceDirty()
@@ -141,8 +140,7 @@ namespace GTAVLife.GameData
 
         private Life()
         {
-            this.isActivate = false;
-
+            this.name = null;
             this.fapCard = -1;
             this.hasTrainTicket = false;
             this.isDirty = true;

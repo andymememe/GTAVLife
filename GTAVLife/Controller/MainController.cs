@@ -5,23 +5,16 @@ namespace GTAVLife.Controller
 {
     public class MainController : SimpleSingletonBase<MainController>, IController
     {
-        private MainView mainView;
-
-        public IView View => mainView;
+        public IView View => MainView.Instance;
 
         public void Show()
         {
-            mainView.Show();
+            View.Show();
         }
 
         public void Process()
         {
-            mainView.Process();
-        }
-
-        private MainController()
-        {
-            mainView = MainView.Instance;
+            View.Process();
         }
     }
 }

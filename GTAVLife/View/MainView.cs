@@ -2,7 +2,6 @@ using System;
 using System.Collections.Generic;
 using GTA.UI;
 using LemonUI.Menus;
-using GTAVLife.GameData;
 using GTAVLife.Helper;
 
 namespace GTAVLife.View
@@ -24,7 +23,7 @@ namespace GTAVLife.View
 
         public void Process()
         {
-            if (Life.Instance.IsActivate)
+            if (GTAVLife.GameData.Environment.Instance.IsActivated)
             {
                 Activate();
             }
@@ -83,7 +82,7 @@ namespace GTAVLife.View
                 switch (tag)
                 {
                     case "activate":
-                        Life.Instance.IsActivate = checkboxItem.Checked;
+                        GTAVLife.GameData.Environment.Instance.IsActivated = checkboxItem.Checked;
                         break;
                     default:
                         break;
@@ -91,7 +90,7 @@ namespace GTAVLife.View
             }
         }
 
-        private MainView()
+        private void setupUI()
         {
             IView[] views = {
                 MainLifeSubview.Instance
@@ -115,6 +114,11 @@ namespace GTAVLife.View
                 this.submenus.Add(view.Menu);
                 this.OnProcess += view.Process;
             }
+        }
+
+        private MainView()
+        {
+            setupUI();
         }
     }
 }

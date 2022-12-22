@@ -1,5 +1,6 @@
 using GTA;
 using GTA.Native;
+using GTAVLife.GameData;
 
 namespace GTAVLife.Helper
 {
@@ -16,12 +17,12 @@ namespace GTAVLife.Helper
 
         public static void ControlGate()
         {
-            Prop[] barrierGates = World.GetNearbyProps(Game.Player.Character.Position, DistanceUtils.ToGameWorldDistance(NEARBY_RADIUS), barrierIDs);
+            Prop[] barrierGates = World.GetNearbyProps(PlayerInfo.Position, DistanceUtils.ToGameWorldDistance(NEARBY_RADIUS), barrierIDs);
             foreach (var gate in barrierGates)
             {
-                if (Game.Player.Character.IsInVehicle())
+                if (PlayerInfo.Character.IsInVehicle())
                 {
-                    float gateDist = World.GetDistance(Game.Player.Character.RightPosition, gate.RightPosition);
+                    float gateDist = World.GetDistance(PlayerInfo.Character.RightPosition, gate.RightPosition);
 
                     if (gateDist <= DistanceUtils.ToGameWorldDistance(OPEN_THRESHOLD))
                     {

@@ -52,6 +52,11 @@ namespace GTAVLife.View
                         Screen.ShowSubtitle("The nickname is used by other vehicle");
                     }
                     break;
+                case "ChangeSkin":
+                    NativeListItem<string> list = (NativeListItem<string>)e.Item;
+                    Life.Instance.Name = list.SelectedItem;
+                    Environment.Instance.IsChangedSkinNeeded = true;
+                    break;
                 default:
                     break;
             }
@@ -66,6 +71,15 @@ namespace GTAVLife.View
                 nativeItem.Tag = item.Key;
                 menu.Add(nativeItem);
             }
+
+            NativeListItem<string> changeSkinList = new NativeListItem<string>("Change Skin");
+            changeSkinList.Tag = "ChangeSkin";
+
+            foreach (string item in MPFreemodeModels.Instance.Models.Keys)
+            {
+                changeSkinList.Add(item);
+            }
+            menu.Add(changeSkinList);
 
             this.menu.ItemActivated += OnActivate;
         }

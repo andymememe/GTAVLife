@@ -28,6 +28,7 @@ public class GTAVLifeScript : Script
         string[] savePath = new string[] { BaseDirectory, "GTAVLifeScript.json" };
         save = SaveHelper.GetInstance(Path.Combine(savePath));
         saveManager = SaveManager.GetInstance(save);
+        saveManager.Load();
 
         string[] charsPath = new string[] { BaseDirectory, "chars.json" };
         MPFreemodeModels.Instance.LoadModels(Path.Combine(charsPath));
@@ -39,11 +40,13 @@ public class GTAVLifeScript : Script
         {
             if (controller.View != null)
             {
+                logger.Debug(controller.View.Menu.Title.Text + "\t" + controller.View.Menu.Subtitle + "\t" + controller.GetType().ToString());
                 objectPool.Add(controller.View.Menu);
                 if (controller.View.Submenus != null)
                 {
                     foreach (NativeMenu submenu in controller.View.Submenus)
                     {
+                        logger.Debug("\t" + submenu.Title.Text + "\t" + submenu.Subtitle);
                         objectPool.Add(submenu);
                     }
                 }
@@ -58,10 +61,18 @@ public class GTAVLifeScript : Script
     {
         if (isFreeAndPlayable())
         {
-            if (Life.Instance.IsActivate)
+            if (GTAVLife.GameData.Environment.Instance.IsActivated)
             {
                 Gate.ControlGate();
                 ScriptTerminator.DisableEverything();
+            }
+            
+            if (GTAVLife.GameData.Environment.Instance.IsJustInitialized)
+            {
+                Life.Instance.ForceDirty();
+                objectPool.HideAll();
+                router.Route("main");
+                GTAVLife.GameData.Environment.Instance.IsJustInitialized = false;
             }
         }
         else
@@ -81,7 +92,14 @@ public class GTAVLifeScript : Script
             if (isFreeAndPlayable())
             {
                 objectPool.HideAll();
-                router.Route("main");
+                if (Life.Instance.Name == null)
+                {
+                    router.Route("char");
+                }
+                else
+                {
+                    router.Route("main");
+                }
             }
             else
             {
@@ -100,29 +118,29 @@ public class GTAVLifeScript : Script
     private bool isFreeAndPlayable()
     {
         return (
-            !Game.IsMissionActive &&
-            !Game.IsRandomEventActive &&
-            !Game.IsCutsceneActive &&
-            !Game.IsLoading &&
-            Game.Player.CanControlCharacter
+            !GameStatus.IsMissionActive &&
+            !GameStatus.IsRandomEventActive &&
+            !GameStatus.IsCutsceneActive &&
+            !GameStatus.IsLoading &&
+            PlayerInfo.Player.CanControlCharacter
         );
     }
 
     private void showUnablePlayText()
     {
-        if (Game.IsMissionActive)
+        if (GameStatus.IsMissionActive)
         {
             GTA.UI.Screen.ShowHelpText("You cannot ~r~Change Life ~s~during a ~g~Mission~s~", beep: false);
         }
-        else if (Game.IsRandomEventActive)
+        else if (GameStatus.IsRandomEventActive)
         {
             GTA.UI.Screen.ShowHelpText("You cannot ~r~Change Life ~s~when closing to a ~g~Random Event~s~", beep: false);
         }
-        else if (Game.IsCutsceneActive)
+        else if (GameStatus.IsCutsceneActive)
         {
             GTA.UI.Screen.ShowHelpText("You cannot ~r~Change Life ~s~during a ~g~Cutscene~s~", beep: false);
         }
-        else if (Game.IsLoading)
+        else if (GameStatus.IsLoading)
         {
             GTA.UI.Screen.ShowHelpText("You cannot ~r~Change Life ~s~during ~g~Loading~s~", beep: false);
         }

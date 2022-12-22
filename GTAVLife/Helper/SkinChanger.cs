@@ -16,7 +16,6 @@ namespace GTAVLife.Helper
         public int Shoes { get; set; }
         public int Accessory { get; set; }
         public int ShirtOverlay { get; set; }
-        public int HairT { get; set; }
         public int UpperT { get; set; }
         public int LowerT { get; set; }
         public int HandsT { get; set; }
@@ -62,6 +61,7 @@ namespace GTAVLife.Helper
         public double Shape16 { get; set; }
         public double Shape17 { get; set; }
         public double Shape18 { get; set; }
+        public string Voice { get; set; }
     }
 
     public class MPFreemodeModels : SimpleSingletonBase<MPFreemodeModels>
@@ -76,7 +76,7 @@ namespace GTAVLife.Helper
         }
     }
 
-    public class PlayerChanger
+    public class SkinChanger
     {
         public static void Change(string name)
         {
@@ -90,6 +90,9 @@ namespace GTAVLife.Helper
                     setHair(model);
                     setFacialFeature(model);
                     setClothes(model);
+
+                    PlayerInfo.Character.Voice = model.Voice;
+                    disablePain();
                 }
             }
         }
@@ -131,8 +134,8 @@ namespace GTAVLife.Helper
 
         private static void setHair(MPFreemodeModel model)
         {
-            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 2, model.Hair, 0, 0);
-            Function.Call(Hash._SET_PED_HAIR_COLOR, PlayerInfo.Character, model.HairT, 0);
+            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 2, model.Hair-1, 0, 0);
+            Function.Call(Hash._SET_PED_HAIR_COLOR, PlayerInfo.Character, model.HairColor, 0);
         }
 
         private static void setFacialFeature(MPFreemodeModel model)
@@ -145,30 +148,35 @@ namespace GTAVLife.Helper
             Function.Call(Hash.SET_PED_HEAD_OVERLAY, PlayerInfo.Character, 8, model.Lipstick, 1.0);
 
             // Eyebrow & Lipstick color
-            Function.Call(Hash._SET_PED_HEAD_OVERLAY_COLOR, PlayerInfo.Character, 2, 1, model.EyebrowsColor, 0);
-            Function.Call(Hash._SET_PED_HEAD_OVERLAY_COLOR, PlayerInfo.Character, 8, 2, model.LipstickColor, 0);
+            Function.Call(Hash._SET_PED_HEAD_OVERLAY_COLOR, PlayerInfo.Character, 2, 1, model.EyebrowsColor, model.EyebrowsColor);
+            Function.Call(Hash._SET_PED_HEAD_OVERLAY_COLOR, PlayerInfo.Character, 8, 2, model.LipstickColor, model.LipstickColor);
         }
 
         private static void setClothes(MPFreemodeModel model)
         {
             // Clothes
-            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 3, model.Upper, model.UpperT, 0);
-            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 4, model.Lower, model.LowerT, 0);
-            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 6, model.Shoes, model.ShoesT, 0);
-            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 8, model.Accessory, model.AccessoryT, 0);
-            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 11, model.ShirtOverlay, model.ShirtOverlayT, 0);
+            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 3, model.Upper-1, model.UpperT-1, 0);
+            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 4, model.Lower-1, model.LowerT-1, 0);
+            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 6, model.Shoes-1, model.ShoesT-1, 0);
+            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 8, model.Accessory-1, model.AccessoryT-1, 0);
+            Function.Call(Hash.SET_PED_COMPONENT_VARIATION, PlayerInfo.Character, 11, model.ShirtOverlay-1, model.ShirtOverlayT-1, 0);
 
             // Watch
             if (model.Watch > 0)
             {
-                Function.Call(Hash.SET_PED_PROP_INDEX, PlayerInfo.Character, 6, model.Watch, model.WatchT, true);
+                Function.Call(Hash.SET_PED_PROP_INDEX, PlayerInfo.Character, 6, model.Watch-1, model.WatchT-1, true);
             }
 
             // Wrist
             if (model.Wrist > 0)
             {
-                Function.Call(Hash.SET_PED_PROP_INDEX, PlayerInfo.Character, 7, model.Wrist, model.WristT, true);
+                Function.Call(Hash.SET_PED_PROP_INDEX, PlayerInfo.Character, 7, model.Wrist-1, model.WristT-1, true);
             }
+        }
+
+        private static void disablePain()
+        {
+            Function.Call(Hash.DISABLE_PED_PAIN_AUDIO, PlayerInfo.Character, true);
         }
     }
 }

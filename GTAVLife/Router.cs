@@ -28,6 +28,9 @@ namespace GTAVLife
         {
             switch (name)
             {
+                case "char":
+                    ProfileController.Instance.Show();
+                    break;
                 case "main":
                     MainController.Instance.Show();
                     break;
@@ -52,6 +55,7 @@ namespace GTAVLife
                 GarageController.Instance,
                 SpawnCarController.Instance,
                 InventoryController.Instance,
+                ProfileController.Instance,
             };
 
             foreach (IController controller in controllers)

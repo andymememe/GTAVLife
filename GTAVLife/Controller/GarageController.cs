@@ -5,23 +5,16 @@ namespace GTAVLife.Controller
 {
     public class GarageController : SimpleSingletonBase<GarageController>, IController
     {
-        private GarageView garageView;
-
-        public IView View => garageView;
+        public IView View => GarageView.Instance;
 
         public void Process()
         {
-            garageView.Process();
+            View.Process();
         }
 
         public void Show()
         {
-            garageView.Show();
-        }
-
-        private GarageController()
-        {
-            garageView = GarageView.Instance;
+            View.Show();
         }
     }
 }

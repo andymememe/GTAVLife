@@ -1,4 +1,5 @@
 using GTA;
+using GTAVLife.GameData;
 
 namespace GTAVLife.Helper
 {
@@ -46,13 +47,5 @@ namespace GTAVLife.Helper
         PRISONER = 0x7EA26372,
         DOMESTIC_ANIMAL = 0x72F30F6E,
         DEER = 0x31E50E10
-    }
-
-    public class RelationshipHelper
-    {
-        public static void MakeFriendly(RelationshipGroupHash group)
-        {
-            Game.Player.Character.RelationshipGroup.SetRelationshipBetweenGroups(new RelationshipGroup((uint)group), Relationship.Respect, bidirectionally: true);
-        }
     }
 }

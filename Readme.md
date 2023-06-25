@@ -4,7 +4,6 @@ Make immersive experience in Los Santos
 
 ## Features
 - Stats
-  - Use Vanilla Health, Stamina
   - Hungry: Faint when drop to 0
   - Muscle: Can carry more items
   - Use items to improve stats
@@ -16,7 +15,7 @@ Make immersive experience in Los Santos
   - Training for Emergency Vehicle, Weapons, etc.
   - Unlock Vehicles, Weapons, etc.
 - Law
-  - Obey Laws, e.g., Speed Limit, Illegal Parking
+  - Fugitive system, hacking to remove wanted, killing witness, etc.
 - Buy / Sell
   - Vehicles, Items, etc.
 - Random Event
